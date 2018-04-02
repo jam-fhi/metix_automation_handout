@@ -4,8 +4,9 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-  	"start": "node server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server.js",
+    "test": "cucumber-js cucumber/features/**/*.feature -b -r cucumber/features/step-definitions --require cucumber/features/support/",
+    "testServer": "concurrently \"npm start\" \"npm test\""
   },
   "repository": {
     "type": "git",
@@ -19,5 +20,12 @@
   "homepage": "https://github.com/jamiefhill/metix_automation_handout#readme",
   "dependencies": {
     "express": "^4.16.3"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "chromedriver": "^2.37.0",
+    "concurrently": "^3.5.1",
+    "cucumber": "^4.1.0",
+    "selenium-webdriver": "^4.0.0-alpha.1"
   }
 }
