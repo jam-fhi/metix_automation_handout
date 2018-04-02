@@ -1,0 +1,22 @@
+{
+  "name": "metix_automation_handout",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jamiefhill/metix_automation_handout.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jamiefhill/metix_automation_handout/issues"
+  },
+  "homepage": "https://github.com/jamiefhill/metix_automation_handout#readme",
+  "dependencies": {
+    "express": "^4.16.3"
+  }
+}
