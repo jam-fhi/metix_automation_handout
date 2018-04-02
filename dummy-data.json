@@ -1,0 +1,17 @@
+{
+  "panel-1": {
+    "paragraph-1": "Solving problems manually?",
+    "paragraph-2": "Grinding out time-consuming individual solutions?",
+    "paragraph-3": "Design a system to solve them for you!"
+  },
+  "panel-2": {
+    "paragraph-1": "Trying to handle too many requests at once?",
+    "paragraph-2": "Testing a complicated platform?",
+    "paragraph-3": "Build a system to handle every operation concurrently!"
+  },
+  "panel-3": {
+    "paragraph-1": "From a button press...",
+    "paragraph-2": "...Test and execute all your commands...",
+    "paragraph-3": "...While you take it easy!"
+  }
+}
