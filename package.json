@@ -5,8 +5,10 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "test": "cucumber-js cucumber/features/**/*.feature -b -r cucumber/features/step-definitions --require cucumber/features/support/",
-    "testServer": "concurrently \"npm start\" \"npm test\""
+    "testChrome": "cucumber-js cucumber/features/**/*.feature -b -r cucumber/features/step-definitions --require cucumber/features/support/ --world-parameters {\"\"\"client\"\"\":\"\"\"chrome\"\"\"}",
+    "testFireFox": "cucumber-js cucumber/features/**/*.feature -b -r cucumber/features/step-definitions --require cucumber/features/support/ --world-parameters {\"\"\"client\"\"\":\"\"\"firefox\"\"\"}",
+    "testServerChrome": "concurrently \"npm start\" \"npm run testChrome\"",
+    "testServerFireFox": "concurrently \"npm start\" \"npm run testFireFox\""
   },
   "repository": {
     "type": "git",
@@ -26,6 +28,7 @@
     "chromedriver": "^2.37.0",
     "concurrently": "^3.5.1",
     "cucumber": "^4.1.0",
+    "geckodriver": "^1.11.0",
     "selenium-webdriver": "^4.0.0-alpha.1"
   }
 }
