@@ -1,13 +1,18 @@
-const { Given, When, Then } = require('cucumber')
-const { expect } = require('chai')
+const { Given, When, Then } = require('cucumber');
+const { expect } = require('chai');
 
-Given('I got to {string}', function (string) {
-    // Write code here that turns the phrase above into concrete actions
-    this.visitPage(string);
-    return 'pass';
+Given('I go to {string}', function (string) {
+    return this.visitPage(string).then((pageLoaded) => {
+        return expect(pageLoaded).to.equal(true);
+    }).catch((e) => {
+        throw e;
+    })
 });
 
-Then('the index.html page will be displayed', function () {
-    // Write code here that turns the phrase above into concrete actions
-    return 'pending';
+ Then('the index.html page will be displayed, with title {string}', function (string) {
+    return this.getPageTitle().then((title) => {
+        return expect(title).to.equal(string);
+    }).catch((e) => {
+        throw e;
+    });
 });

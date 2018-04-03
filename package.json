@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "testChrome": "cucumber-js cucumber/features/**/*.feature -b -r cucumber/features/step-definitions --require cucumber/features/support/ --world-parameters {\"\"\"client\"\"\":\"\"\"chrome\"\"\"}",
+    "testChrome": "cucumber-js cucumber/features/**/*.feature -b -r cucumber/features/step-definitions --require cucumber/features/support/ --world-parameters {\"\"\"client\"\"\":\"\"\"chrome\"\"\"} --format=json:cucumber/logs/cucumber.json",
     "testFireFox": "cucumber-js cucumber/features/**/*.feature -b -r cucumber/features/step-definitions --require cucumber/features/support/ --world-parameters {\"\"\"client\"\"\":\"\"\"firefox\"\"\"}",
     "testServerChrome": "concurrently \"npm start\" \"npm run testChrome\"",
     "testServerFireFox": "concurrently \"npm start\" \"npm run testFireFox\""

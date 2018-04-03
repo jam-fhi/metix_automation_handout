@@ -6,13 +6,13 @@
 
 This command starts an express server to statically serve the sample website
 
-#### test
+#### testChrome or testFireFox
 
-This command runs the cucumber test framework
+This command runs the cucumber test framework, each command runs the specified browser.
 
-#### testServer
+#### testServerChrome or testServerFireFox
 
-This command uses the concurrently package to run the server and then run the test framework.
+This command uses the concurrently package to run the server and then run the test framework. Each command runs the specified browser.
 
 ## Dependencies
 

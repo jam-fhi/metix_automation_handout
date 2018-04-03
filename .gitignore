@@ -1,3 +1,4 @@
 # Node packages and logs
 /node_modules/
 /npm-debug*
+/cucumber/logs/*
