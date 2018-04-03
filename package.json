@@ -7,8 +7,8 @@
     "start": "node server.js",
     "testChrome": "cucumber-js cucumber/features/**/*.feature -b -r cucumber/features/step-definitions --require cucumber/features/support/ --world-parameters {\"\"\"client\"\"\":\"\"\"chrome\"\"\"} --format=json:cucumber/logs/cucumber.json",
     "testFireFox": "cucumber-js cucumber/features/**/*.feature -b -r cucumber/features/step-definitions --require cucumber/features/support/ --world-parameters {\"\"\"client\"\"\":\"\"\"firefox\"\"\"}",
-    "testServerChrome": "concurrently \"npm start\" \"npm run testChrome\"",
-    "testServerFireFox": "concurrently \"npm start\" \"npm run testFireFox\""
+    "testServerChrome": "concurrently \"npm start\" \"grunt testChrome --force\"",
+    "testServerFireFox": "concurrently \"npm start\" \"grunt testFireFox --force\""
   },
   "repository": {
     "type": "git",
@@ -29,6 +29,11 @@
     "concurrently": "^3.5.1",
     "cucumber": "^4.1.0",
     "geckodriver": "^1.11.0",
+    "grunt": "^1.0.2",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-env": "^0.4.4",
+    "grunt-exec": "^3.0.0",
+    "grunt-mkdir": "^1.0.0",
     "selenium-webdriver": "^4.0.0-alpha.1"
   }
 }

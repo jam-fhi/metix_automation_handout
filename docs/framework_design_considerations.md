@@ -11,3 +11,5 @@ Additionally no version number has been specified for the supported browsers, bu
 ### Logging Test Results
 
 Cucumber natively supports JSON output to a specified file.
+
+Took a bit of a detour on this, I had expected it would be easy to directly set variables in the filename I was logging to. As it turns out, it wasn't. Finally went with grunt tasks, with the browser name set as an enviornment variable and the log file being copied and renamed at the end of a test run to keep a history of test results and show which browser was used for a test run.

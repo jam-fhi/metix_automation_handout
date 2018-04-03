@@ -12,7 +12,7 @@ This command runs the cucumber test framework, each command runs the specified b
 
 #### testServerChrome or testServerFireFox
 
-This command uses the concurrently package to run the server and then run the test framework. Each command runs the specified browser.
+This command uses the concurrently package to run the server and then run the test framework. Each command runs the specified browser, via grunt tasks in order to create log folder if it does not exist and rename the log file with a timestamp.
 
 ## Dependencies
 
