@@ -2,3 +2,4 @@
 /node_modules/
 /npm-debug*
 /cucumber/logs/*
+/cucumber/dashboard/public/logs/*
