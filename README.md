@@ -28,6 +28,10 @@ The dashboard to report on test results is developed using react. It requires a 
 
 This command builds the dashboard, copies any existing test result json files into the public directory then runs express to serve the pages and finally loads the dashboard in chrome.
 
+#### runDashboard
+
+This command will run the dashboard. The built dashboard project is included in this repository, so really there is no need to do a build, just run the dashboard to review test results. This is also done at the end of a test run, so the dashboard with the latest results will open automatically. It's defaulted to chrome as a browser.
+
 ## Dependencies
 
 #### NodeJS v8+

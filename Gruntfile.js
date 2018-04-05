@@ -127,7 +127,11 @@ module.exports = function(grunt) {
     });
 
     grunt.registerTask('afterTest', function(arg) {
-        grunt.task.run('copy:renameLog', 'deployTestReports', 'express:dashboard', 'open:dashboard', 'watch:dashboard');
+        grunt.task.run('copy:renameLog', 'deployTestReports', 'runDashboard');
+    });    
+
+    grunt.registerTask('runDashboard', function(arg) {
+        grunt.task.run('express:dashboard', 'open:dashboard', 'watch:dashboard');
     });    
 
     grunt.registerTask('deployTestReports', function(arg) {
@@ -139,7 +143,7 @@ module.exports = function(grunt) {
     });
 
     grunt.registerTask('buildDashboard', function(arg) {
-        grunt.task.run('clean:dashboard', 'env:dashboard', 'copy:dashboardResource', 'browserify:dashboard', 'concat_css:dashboard', 'deployTestReports', 'express:dashboard', 'open:dashboard', 'watch:dashboard');
+        grunt.task.run('clean:dashboard', 'env:dashboard', 'copy:dashboardResource', 'browserify:dashboard', 'concat_css:dashboard', 'deployTestReports', 'runDashboard');
     });    
 
     grunt.registerTask('indexTestReports', function(arg) {

@@ -20,13 +20,7 @@ export function getReportFile(filename) {
     	filename: filename
   	})
 }
-/*
-export function loadReportFile() {
-	Dispatcher.dispatch({
-    	type: "LoadReportFile"
-  	})
-}
-*/
+
 export function replyReportFile(success, data, filename) {
 	Dispatcher.dispatch({
     	type: "ReplyReportFile",

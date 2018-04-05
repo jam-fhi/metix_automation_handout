@@ -1155,13 +1155,7 @@ function getReportFile(filename) {
       filename: filename
    });
 }
-/*
-export function loadReportFile() {
-	Dispatcher.dispatch({
-    	type: "LoadReportFile"
-  	})
-}
-*/
+
 function replyReportFile(success, data, filename) {
    _dispatcher2.default.dispatch({
       type: "ReplyReportFile",
