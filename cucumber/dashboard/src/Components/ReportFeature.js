@@ -11,8 +11,11 @@ class ReportFeature extends React.Component {
 
     render() {
         const { reportData } = this.state;
+        let scenarioCount = 0;
         const ReportScenarioView = reportData.elements.map((elements) => {
-            return <ReportScenario key={elements.id} scenarioData={elements} uri={this.state.reportData.uri} />;
+        	let reactKey = elements.id + scenarioCount;
+        	scenarioCount++;
+            return <ReportScenario key={reactKey} scenarioData={elements} uri={this.state.reportData.uri} />;
         });    	
         return (
             <div className="container">

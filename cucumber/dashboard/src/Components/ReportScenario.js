@@ -11,8 +11,10 @@ class ReportScenario extends React.Component {
 
     render() {
         const { scenarioData } = this.state;
+        let stepCount = 0;
         const ReportStepView = scenarioData.steps.map((step) => {
-        	const viewKey = this.state.scenarioData.id + step.line;
+        	const viewKey = this.state.scenarioData.id + step.line + stepCount;
+        	stepCount++;
             return <ReportStep key={viewKey} stepData={step} uri={this.state.uri} />;
         });    	    	
         return (
