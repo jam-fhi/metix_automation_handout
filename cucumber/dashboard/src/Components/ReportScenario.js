@@ -21,7 +21,7 @@ class ReportScenario extends React.Component {
     render() {
 
     	let styleClass = "card border-success mb-3";
-    	if(this.state.result === "failed") {
+    	if(this.state.scenarioData.stats.status === "failed") {
 			styleClass = "card border-danger mb-3";
 		}
 		const duration = getDuration(this.state.scenarioData.stats.duration);

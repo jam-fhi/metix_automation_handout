@@ -1,18 +1,12 @@
 import React from 'react';
 import ToggleDisplay from 'react-toggle-display';
+import { getDuration } from '../supportMethods';
 
 class ReportStep extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {stepData: props.stepData, uri: props.uri, duration: 0, result: 'pending', showResult: false, prefix: "+"};
-        // Note tags and elements are arrays.
-    }
-
-    componentWillMount() {
-    	this.calculateDuration();
-    	this.setState({result: this.state.stepData.result.status});
-    	
+        this.state = {stepData: props.stepData, uri: props.uri, showResult: false, prefix: "+"};
     }
 
     toggleResultDisplay() {
@@ -23,20 +17,15 @@ class ReportStep extends React.Component {
     	}
     }
 
-    calculateDuration() {
-
-		if('duration' in this.state.stepData.result) {
-			const duration = this.state.stepData.result.duration / 1000000000;
-			this.setState({duration: duration});
-		}
-    }
-
     render() {
-
+    	let duration = 0;
+    	if('duration' in this.state.stepData.result) {
+	    	duration = getDuration(this.state.stepData.result.duration);
+	    }
     	let styleClass = "card text-white bg-warning mb-3";
-    	if(this.state.result === "passed") {
+    	if(this.state.stepData.result.status === "passed") {
 			styleClass = "card text-white bg-success mb-3";
-		} else if(this.state.result === "failed") {
+		} else if(this.state.stepData.result.status === "failed") {
 			styleClass = "card text-white bg-danger mb-3";
 		}
 
@@ -45,16 +34,10 @@ class ReportStep extends React.Component {
         return (
             <div className={styleClass} onClick={this.toggleResultDisplay.bind(this)} >
                 <div className="card-header">
-                	<span>{this.state.prefix} {this.state.stepData.keyword} {this.state.stepData.name} ({this.state.result}, {this.state.duration}s)</span>
+                	<span>{this.state.prefix} {this.state.stepData.keyword} {this.state.stepData.name} ({this.state.stepData.result.status}, {duration}s)</span>
                 </div>
                 <ToggleDisplay if={this.state.showResult === true}>
 		            <div className="card-body">
-		                <div>
-		                	<span>Status: {this.state.result}</span>
-		                </div>             
-		                <div>
-		                	<span>Duration: {this.state.duration}</span>
-		                </div>
 		                <div>
 		                	<span>Source: {source}</span>
 		                </div>                

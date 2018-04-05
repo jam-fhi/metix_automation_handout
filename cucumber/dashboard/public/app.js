@@ -599,7 +599,7 @@ var ReportScenario = function (_React$Component) {
             var _this2 = this;
 
             var styleClass = "card border-success mb-3";
-            if (this.state.result === "failed") {
+            if (this.state.scenarioData.stats.status === "failed") {
                 styleClass = "card border-danger mb-3";
             }
             var duration = (0, _supportMethods.getDuration)(this.state.scenarioData.stats.duration);
@@ -721,6 +721,8 @@ var _reactToggleDisplay = require('react-toggle-display');
 
 var _reactToggleDisplay2 = _interopRequireDefault(_reactToggleDisplay);
 
+var _supportMethods = require('../supportMethods');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -739,18 +741,11 @@ var ReportStep = function (_React$Component) {
 
         var _this = _possibleConstructorReturn(this, (ReportStep.__proto__ || Object.getPrototypeOf(ReportStep)).call(this, props));
 
-        _this.state = { stepData: props.stepData, uri: props.uri, duration: 0, result: 'pending', showResult: false, prefix: "+" };
-        // Note tags and elements are arrays.
+        _this.state = { stepData: props.stepData, uri: props.uri, showResult: false, prefix: "+" };
         return _this;
     }
 
     _createClass(ReportStep, [{
-        key: 'componentWillMount',
-        value: function componentWillMount() {
-            this.calculateDuration();
-            this.setState({ result: this.state.stepData.result.status });
-        }
-    }, {
         key: 'toggleResultDisplay',
         value: function toggleResultDisplay() {
             if (this.state.showResult === false) {
@@ -760,22 +755,16 @@ var ReportStep = function (_React$Component) {
             }
         }
     }, {
-        key: 'calculateDuration',
-        value: function calculateDuration() {
-
-            if ('duration' in this.state.stepData.result) {
-                var duration = this.state.stepData.result.duration / 1000000000;
-                this.setState({ duration: duration });
-            }
-        }
-    }, {
         key: 'render',
         value: function render() {
-
+            var duration = 0;
+            if ('duration' in this.state.stepData.result) {
+                duration = (0, _supportMethods.getDuration)(this.state.stepData.result.duration);
+            }
             var styleClass = "card text-white bg-warning mb-3";
-            if (this.state.result === "passed") {
+            if (this.state.stepData.result.status === "passed") {
                 styleClass = "card text-white bg-success mb-3";
-            } else if (this.state.result === "failed") {
+            } else if (this.state.stepData.result.status === "failed") {
                 styleClass = "card text-white bg-danger mb-3";
             }
 
@@ -785,7 +774,7 @@ var ReportStep = function (_React$Component) {
                 'div',
                 _defineProperty({ className: styleClass, onClick: this.toggleResultDisplay.bind(this), __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 46
+                        lineNumber: 35
                     },
                     __self: this
                 }, '__self', this),
@@ -793,7 +782,7 @@ var ReportStep = function (_React$Component) {
                     'div',
                     _defineProperty({ className: 'card-header', __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 47
+                            lineNumber: 36
                         },
                         __self: this
                     }, '__self', this),
@@ -802,7 +791,7 @@ var ReportStep = function (_React$Component) {
                         _defineProperty({
                             __source: {
                                 fileName: _jsxFileName,
-                                lineNumber: 48
+                                lineNumber: 37
                             },
                             __self: this
                         }, '__self', this),
@@ -812,9 +801,9 @@ var ReportStep = function (_React$Component) {
                         ' ',
                         this.state.stepData.name,
                         ' (',
-                        this.state.result,
+                        this.state.stepData.result.status,
                         ', ',
-                        this.state.duration,
+                        duration,
                         's)'
                     )
                 ),
@@ -822,7 +811,7 @@ var ReportStep = function (_React$Component) {
                     _reactToggleDisplay2.default,
                     _defineProperty({ 'if': this.state.showResult === true, __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 50
+                            lineNumber: 39
                         },
                         __self: this
                     }, '__self', this),
@@ -830,7 +819,7 @@ var ReportStep = function (_React$Component) {
                         'div',
                         _defineProperty({ className: 'card-body', __source: {
                                 fileName: _jsxFileName,
-                                lineNumber: 51
+                                lineNumber: 40
                             },
                             __self: this
                         }, '__self', this),
@@ -839,7 +828,7 @@ var ReportStep = function (_React$Component) {
                             _defineProperty({
                                 __source: {
                                     fileName: _jsxFileName,
-                                    lineNumber: 52
+                                    lineNumber: 41
                                 },
                                 __self: this
                             }, '__self', this),
@@ -848,51 +837,7 @@ var ReportStep = function (_React$Component) {
                                 _defineProperty({
                                     __source: {
                                         fileName: _jsxFileName,
-                                        lineNumber: 53
-                                    },
-                                    __self: this
-                                }, '__self', this),
-                                'Status: ',
-                                this.state.result
-                            )
-                        ),
-                        _react2.default.createElement(
-                            'div',
-                            _defineProperty({
-                                __source: {
-                                    fileName: _jsxFileName,
-                                    lineNumber: 55
-                                },
-                                __self: this
-                            }, '__self', this),
-                            _react2.default.createElement(
-                                'span',
-                                _defineProperty({
-                                    __source: {
-                                        fileName: _jsxFileName,
-                                        lineNumber: 56
-                                    },
-                                    __self: this
-                                }, '__self', this),
-                                'Duration: ',
-                                this.state.duration
-                            )
-                        ),
-                        _react2.default.createElement(
-                            'div',
-                            _defineProperty({
-                                __source: {
-                                    fileName: _jsxFileName,
-                                    lineNumber: 58
-                                },
-                                __self: this
-                            }, '__self', this),
-                            _react2.default.createElement(
-                                'span',
-                                _defineProperty({
-                                    __source: {
-                                        fileName: _jsxFileName,
-                                        lineNumber: 59
+                                        lineNumber: 42
                                     },
                                     __self: this
                                 }, '__self', this),
@@ -904,7 +849,7 @@ var ReportStep = function (_React$Component) {
                             _reactToggleDisplay2.default,
                             _defineProperty({ 'if': this.state.stepData.result.error_message !== null, __source: {
                                     fileName: _jsxFileName,
-                                    lineNumber: 61
+                                    lineNumber: 44
                                 },
                                 __self: this
                             }, '__self', this),
@@ -913,7 +858,7 @@ var ReportStep = function (_React$Component) {
                                 _defineProperty({
                                     __source: {
                                         fileName: _jsxFileName,
-                                        lineNumber: 62
+                                        lineNumber: 45
                                     },
                                     __self: this
                                 }, '__self', this),
@@ -931,7 +876,7 @@ var ReportStep = function (_React$Component) {
 
 exports.default = ReportStep;
 
-},{"react":47,"react-toggle-display":44}],8:[function(require,module,exports){
+},{"../supportMethods":15,"react":47,"react-toggle-display":44}],8:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
