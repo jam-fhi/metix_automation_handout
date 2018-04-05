@@ -32,8 +32,8 @@ class ReportStep extends React.Component {
 		// From another test result, using this calculation then Duration: 5.008
 		// Error Message: Error: function timed out, ensure the promise resolves 
 		// within 5000 milliseconds
-		if('duration' in this.state.stepData.result.duration) {
-			duration = this.state.stepData.result.duration / 1000000000;
+		if('duration' in this.state.stepData.result) {
+			const duration = this.state.stepData.result.duration / 1000000000;
 			this.setState({duration: duration});
 		}
     }

@@ -240,15 +240,26 @@ var ReportFeature = function (_React$Component) {
 
         var _this = _possibleConstructorReturn(this, (ReportFeature.__proto__ || Object.getPrototypeOf(ReportFeature)).call(this, props));
 
-        _this.state = { reportData: props.reportData };
-        // Note tags and elements are arrays.
+        _this.state = { reportData: props.reportData, result: 'passed', duration: 0 };
         return _this;
     }
 
     _createClass(ReportFeature, [{
+        key: 'setResult',
+        value: function setResult(result) {
+            if (result !== 'passed') {
+                this.setState({ result: 'failed' });
+            }
+        }
+    }, {
         key: 'render',
         value: function render() {
             var _this2 = this;
+
+            var styleClass = "card border-success mb-3";
+            if (this.state.result === "failed") {
+                styleClass = "card border-danger mb-3";
+            }
 
             var reportData = this.state.reportData;
 
@@ -256,27 +267,26 @@ var ReportFeature = function (_React$Component) {
             var ReportScenarioView = reportData.elements.map(function (elements) {
                 var reactKey = elements.id + scenarioCount;
                 scenarioCount++;
-                return _react2.default.createElement(_ReportScenario2.default, _defineProperty({ key: reactKey, scenarioData: elements, uri: _this2.state.reportData.uri, __source: {
+                return _react2.default.createElement(_ReportScenario2.default, _defineProperty({ key: reactKey, scenarioData: elements, setResult: _this2.setResult.bind(_this2), uri: _this2.state.reportData.uri, __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 18
+                        lineNumber: 28
                     },
                     __self: _this2
                 }, '__self', _this2));
             });
             return _react2.default.createElement(
                 'div',
-                _defineProperty({ className: 'container', __source: {
+                _defineProperty({ className: styleClass, style: { "maxWidth": "30rem" }, __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 21
+                        lineNumber: 31
                     },
                     __self: this
                 }, '__self', this),
                 _react2.default.createElement(
                     'div',
-                    _defineProperty({
-                        __source: {
+                    _defineProperty({ className: 'card-header', __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 22
+                            lineNumber: 32
                         },
                         __self: this
                     }, '__self', this),
@@ -285,92 +295,50 @@ var ReportFeature = function (_React$Component) {
                         _defineProperty({
                             __source: {
                                 fileName: _jsxFileName,
-                                lineNumber: 23
+                                lineNumber: 33
                             },
                             __self: this
                         }, '__self', this),
                         this.state.reportData.keyword,
                         ' ',
-                        this.state.reportData.name
+                        this.state.reportData.name,
+                        ' (',
+                        this.state.result,
+                        ', ',
+                        this.state.duration,
+                        's)'
                     )
                 ),
                 _react2.default.createElement(
                     'div',
-                    _defineProperty({
-                        __source: {
+                    _defineProperty({ className: 'card-body', __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 25
+                            lineNumber: 35
                         },
                         __self: this
                     }, '__self', this),
                     _react2.default.createElement(
-                        'span',
-                        _defineProperty({
-                            __source: {
+                        'div',
+                        _defineProperty({ className: 'card border-primary mb-3', __source: {
                                 fileName: _jsxFileName,
-                                lineNumber: 26
+                                lineNumber: 36
                             },
                             __self: this
                         }, '__self', this),
-                        'ID: ',
-                        this.state.reportData.id
-                    )
-                ),
-                _react2.default.createElement(
-                    'div',
-                    _defineProperty({
-                        __source: {
-                            fileName: _jsxFileName,
-                            lineNumber: 28
-                        },
-                        __self: this
-                    }, '__self', this),
-                    _react2.default.createElement(
-                        'span',
-                        _defineProperty({
-                            __source: {
-                                fileName: _jsxFileName,
-                                lineNumber: 29
-                            },
-                            __self: this
-                        }, '__self', this),
-                        'Source: ',
-                        this.state.reportData.uri,
-                        ' @ line ',
-                        this.state.reportData.line
-                    )
-                ),
-                _react2.default.createElement(
-                    'div',
-                    _defineProperty({
-                        __source: {
-                            fileName: _jsxFileName,
-                            lineNumber: 31
-                        },
-                        __self: this
-                    }, '__self', this),
-                    _react2.default.createElement(
-                        'span',
-                        _defineProperty({
-                            __source: {
-                                fileName: _jsxFileName,
-                                lineNumber: 32
-                            },
-                            __self: this
-                        }, '__self', this),
-                        'Tags: ',
-                        this.state.reportData.tags
-                    )
-                ),
-                _react2.default.createElement(
-                    'div',
-                    _defineProperty({
-                        __source: {
-                            fileName: _jsxFileName,
-                            lineNumber: 34
-                        },
-                        __self: this
-                    }, '__self', this),
+                        _react2.default.createElement(
+                            'div',
+                            _defineProperty({ className: 'card-header', __source: {
+                                    fileName: _jsxFileName,
+                                    lineNumber: 37
+                                },
+                                __self: this
+                            }, '__self', this),
+                            'Source: ',
+                            this.state.reportData.uri,
+                            ' @ line ',
+                            this.state.reportData.line
+                        )
+                    ),
                     ReportScenarioView
                 )
             );
@@ -560,6 +528,7 @@ var ReportScenario = function (_React$Component) {
         value: function setResult(result) {
             if (result !== 'passed') {
                 this.setState({ result: 'failed' });
+                this.props.setResult('failed');
             }
         }
     }, {
@@ -579,7 +548,7 @@ var ReportScenario = function (_React$Component) {
                 stepCount++;
                 return _react2.default.createElement(_ReportStep2.default, _defineProperty({ key: viewKey, stepData: step, uri: _this2.state.uri, setResult: _this2.setResult.bind(_this2), __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 52
+                        lineNumber: 53
                     },
                     __self: _this2
                 }, '__self', _this2));
@@ -588,7 +557,7 @@ var ReportScenario = function (_React$Component) {
                 'div',
                 _defineProperty({ className: styleClass, style: { "maxWidth": "30rem" }, __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 55
+                        lineNumber: 56
                     },
                     __self: this
                 }, '__self', this),
@@ -596,7 +565,7 @@ var ReportScenario = function (_React$Component) {
                     'div',
                     _defineProperty({ className: 'card-header', __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 56
+                            lineNumber: 57
                         },
                         __self: this
                     }, '__self', this),
@@ -605,7 +574,7 @@ var ReportScenario = function (_React$Component) {
                         _defineProperty({
                             __source: {
                                 fileName: _jsxFileName,
-                                lineNumber: 57
+                                lineNumber: 58
                             },
                             __self: this
                         }, '__self', this),
@@ -623,7 +592,7 @@ var ReportScenario = function (_React$Component) {
                     'div',
                     _defineProperty({ className: 'card-body', __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 59
+                            lineNumber: 60
                         },
                         __self: this
                     }, '__self', this),
@@ -631,7 +600,7 @@ var ReportScenario = function (_React$Component) {
                         'div',
                         _defineProperty({ className: 'card border-primary mb-3', __source: {
                                 fileName: _jsxFileName,
-                                lineNumber: 60
+                                lineNumber: 61
                             },
                             __self: this
                         }, '__self', this),
@@ -639,7 +608,7 @@ var ReportScenario = function (_React$Component) {
                             'div',
                             _defineProperty({ className: 'card-header', __source: {
                                     fileName: _jsxFileName,
-                                    lineNumber: 61
+                                    lineNumber: 62
                                 },
                                 __self: this
                             }, '__self', this),
@@ -728,11 +697,10 @@ var ReportStep = function (_React$Component) {
             // From another test result, using this calculation then Duration: 5.008
             // Error Message: Error: function timed out, ensure the promise resolves 
             // within 5000 milliseconds
-            var duration = this.state.stepData.result.duration / 1000000000;
-            if (isNaN(duration)) {
-                duration = 0;
+            if ('duration' in this.state.stepData.result) {
+                var duration = this.state.stepData.result.duration / 1000000000;
+                this.setState({ duration: duration });
             }
-            this.setState({ duration: duration });
         }
     }, {
         key: 'render',
@@ -751,7 +719,7 @@ var ReportStep = function (_React$Component) {
                 'div',
                 _defineProperty({ className: styleClass, style: { "maxWidth": "30rem" }, onClick: this.toggleResultDisplay.bind(this), __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 54
+                        lineNumber: 53
                     },
                     __self: this
                 }, '__self', this),
@@ -759,7 +727,7 @@ var ReportStep = function (_React$Component) {
                     'div',
                     _defineProperty({ className: 'card-header', __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 55
+                            lineNumber: 54
                         },
                         __self: this
                     }, '__self', this),
@@ -768,7 +736,7 @@ var ReportStep = function (_React$Component) {
                         _defineProperty({
                             __source: {
                                 fileName: _jsxFileName,
-                                lineNumber: 56
+                                lineNumber: 55
                             },
                             __self: this
                         }, '__self', this),
@@ -788,7 +756,7 @@ var ReportStep = function (_React$Component) {
                     _reactToggleDisplay2.default,
                     _defineProperty({ 'if': this.state.showResult === true, __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 58
+                            lineNumber: 57
                         },
                         __self: this
                     }, '__self', this),
@@ -796,7 +764,7 @@ var ReportStep = function (_React$Component) {
                         'div',
                         _defineProperty({ className: 'card-body', __source: {
                                 fileName: _jsxFileName,
-                                lineNumber: 59
+                                lineNumber: 58
                             },
                             __self: this
                         }, '__self', this),
@@ -805,7 +773,7 @@ var ReportStep = function (_React$Component) {
                             _defineProperty({
                                 __source: {
                                     fileName: _jsxFileName,
-                                    lineNumber: 60
+                                    lineNumber: 59
                                 },
                                 __self: this
                             }, '__self', this),
@@ -814,7 +782,7 @@ var ReportStep = function (_React$Component) {
                                 _defineProperty({
                                     __source: {
                                         fileName: _jsxFileName,
-                                        lineNumber: 61
+                                        lineNumber: 60
                                     },
                                     __self: this
                                 }, '__self', this),
@@ -827,7 +795,7 @@ var ReportStep = function (_React$Component) {
                             _defineProperty({
                                 __source: {
                                     fileName: _jsxFileName,
-                                    lineNumber: 63
+                                    lineNumber: 62
                                 },
                                 __self: this
                             }, '__self', this),
@@ -836,7 +804,7 @@ var ReportStep = function (_React$Component) {
                                 _defineProperty({
                                     __source: {
                                         fileName: _jsxFileName,
-                                        lineNumber: 64
+                                        lineNumber: 63
                                     },
                                     __self: this
                                 }, '__self', this),
@@ -849,7 +817,7 @@ var ReportStep = function (_React$Component) {
                             _defineProperty({
                                 __source: {
                                     fileName: _jsxFileName,
-                                    lineNumber: 66
+                                    lineNumber: 65
                                 },
                                 __self: this
                             }, '__self', this),
@@ -858,7 +826,7 @@ var ReportStep = function (_React$Component) {
                                 _defineProperty({
                                     __source: {
                                         fileName: _jsxFileName,
-                                        lineNumber: 67
+                                        lineNumber: 66
                                     },
                                     __self: this
                                 }, '__self', this),
@@ -870,7 +838,7 @@ var ReportStep = function (_React$Component) {
                             _reactToggleDisplay2.default,
                             _defineProperty({ 'if': this.state.stepData.result.error_message !== null, __source: {
                                     fileName: _jsxFileName,
-                                    lineNumber: 69
+                                    lineNumber: 68
                                 },
                                 __self: this
                             }, '__self', this),
@@ -879,7 +847,7 @@ var ReportStep = function (_React$Component) {
                                 _defineProperty({
                                     __source: {
                                         fileName: _jsxFileName,
-                                        lineNumber: 70
+                                        lineNumber: 69
                                     },
                                     __self: this
                                 }, '__self', this),
