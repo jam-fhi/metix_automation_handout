@@ -1,6 +1,6 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
 var css = ""; (require("browserify-css").createStyle(css, { "href": "cucumber\\dashboard\\src\\App.css" }, { "insertAt": "bottom" })); module.exports = css;
-},{"browserify-css":12}],2:[function(require,module,exports){
+},{"browserify-css":17}],2:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -96,7 +96,7 @@ var App = function (_React$Component) {
             },
             __self: this
           }, '__self', this),
-          'Reports Dashboard'
+          'Test Reports Dashboard'
         ),
         _react2.default.createElement(
           _reactToggleDisplay2.default,
@@ -137,7 +137,7 @@ var App = function (_React$Component) {
 
 exports.default = App;
 
-},{"./App.css":1,"./Components/ErrorReport":3,"./Components/ReportIndex":4,"./ReportActions":6,"./ReportStore":7,"react":43,"react-toggle-display":40}],3:[function(require,module,exports){
+},{"./App.css":1,"./Components/ErrorReport":3,"./Components/ReportIndex":5,"./ReportActions":11,"./ReportStore":12,"react":48,"react-toggle-display":45}],3:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -204,7 +204,182 @@ var ErrorReport = function (_React$Component) {
 
 exports.default = ErrorReport;
 
-},{"react":43}],4:[function(require,module,exports){
+},{"react":48}],4:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+var _jsxFileName = 'D:\\portfolio pieces\\metix_automation_handout\\cucumber\\dashboard\\src\\Components\\ReportFeature.js';
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _ReportScenario = require('./ReportScenario');
+
+var _ReportScenario2 = _interopRequireDefault(_ReportScenario);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var ReportFeature = function (_React$Component) {
+    _inherits(ReportFeature, _React$Component);
+
+    function ReportFeature(props) {
+        _classCallCheck(this, ReportFeature);
+
+        var _this = _possibleConstructorReturn(this, (ReportFeature.__proto__ || Object.getPrototypeOf(ReportFeature)).call(this, props));
+
+        _this.state = { reportData: props.reportData };
+        // Note tags and elements are arrays.
+        return _this;
+    }
+
+    _createClass(ReportFeature, [{
+        key: 'render',
+        value: function render() {
+            var _this2 = this;
+
+            var reportData = this.state.reportData;
+
+            var ReportScenarioView = reportData.elements.map(function (elements) {
+                return _react2.default.createElement(_ReportScenario2.default, _defineProperty({ key: elements.id, scenarioData: elements, uri: _this2.state.reportData.uri, __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 15
+                    },
+                    __self: _this2
+                }, '__self', _this2));
+            });
+            return _react2.default.createElement(
+                'div',
+                _defineProperty({ className: 'container', __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 18
+                    },
+                    __self: this
+                }, '__self', this),
+                _react2.default.createElement(
+                    'div',
+                    _defineProperty({
+                        __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 19
+                        },
+                        __self: this
+                    }, '__self', this),
+                    _react2.default.createElement(
+                        'span',
+                        _defineProperty({
+                            __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 20
+                            },
+                            __self: this
+                        }, '__self', this),
+                        this.state.reportData.keyword,
+                        ' ',
+                        this.state.reportData.name
+                    )
+                ),
+                _react2.default.createElement(
+                    'div',
+                    _defineProperty({
+                        __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 22
+                        },
+                        __self: this
+                    }, '__self', this),
+                    _react2.default.createElement(
+                        'span',
+                        _defineProperty({
+                            __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 23
+                            },
+                            __self: this
+                        }, '__self', this),
+                        'ID: ',
+                        this.state.reportData.id
+                    )
+                ),
+                _react2.default.createElement(
+                    'div',
+                    _defineProperty({
+                        __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 25
+                        },
+                        __self: this
+                    }, '__self', this),
+                    _react2.default.createElement(
+                        'span',
+                        _defineProperty({
+                            __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 26
+                            },
+                            __self: this
+                        }, '__self', this),
+                        'Source: ',
+                        this.state.reportData.uri,
+                        ' @ line ',
+                        this.state.reportData.line
+                    )
+                ),
+                _react2.default.createElement(
+                    'div',
+                    _defineProperty({
+                        __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 28
+                        },
+                        __self: this
+                    }, '__self', this),
+                    _react2.default.createElement(
+                        'span',
+                        _defineProperty({
+                            __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 29
+                            },
+                            __self: this
+                        }, '__self', this),
+                        'Tags: ',
+                        this.state.reportData.tags
+                    )
+                ),
+                _react2.default.createElement(
+                    'div',
+                    _defineProperty({
+                        __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 31
+                        },
+                        __self: this
+                    }, '__self', this),
+                    ReportScenarioView
+                )
+            );
+        }
+    }]);
+
+    return ReportFeature;
+}(_react2.default.Component);
+
+exports.default = ReportFeature;
+
+},{"./ReportScenario":6,"react":48}],5:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -252,7 +427,7 @@ var ReportIndex = function (_React$Component) {
             var reportIndex = this.state.reportIndex;
 
             var ReportSummaryView = reportIndex.map(function (report) {
-                return _react2.default.createElement(_ReportSummary2.default, _defineProperty({ key: report.filename, browser: report.browser, timestamp: report.timestamp, __source: {
+                return _react2.default.createElement(_ReportSummary2.default, _defineProperty({ key: report.filename, filename: report.filename, browser: report.browser, timestamp: report.timestamp, __source: {
                         fileName: _jsxFileName,
                         lineNumber: 14
                     },
@@ -310,19 +485,23 @@ var ReportIndex = function (_React$Component) {
 
 exports.default = ReportIndex;
 
-},{"./ReportSummary":5,"react":43}],5:[function(require,module,exports){
+},{"./ReportSummary":10,"react":48}],6:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-var _jsxFileName = 'D:\\portfolio pieces\\metix_automation_handout\\cucumber\\dashboard\\src\\Components\\ReportSummary.js';
+var _jsxFileName = 'D:\\portfolio pieces\\metix_automation_handout\\cucumber\\dashboard\\src\\Components\\ReportScenario.js';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
+
+var _ReportStep = require('./ReportStep');
+
+var _ReportStep2 = _interopRequireDefault(_ReportStep);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -334,24 +513,224 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var ReportSummary = function (_React$Component) {
-    _inherits(ReportSummary, _React$Component);
+var ReportScenario = function (_React$Component) {
+    _inherits(ReportScenario, _React$Component);
 
-    function ReportSummary(props) {
-        _classCallCheck(this, ReportSummary);
+    function ReportScenario(props) {
+        _classCallCheck(this, ReportScenario);
 
-        var _this = _possibleConstructorReturn(this, (ReportSummary.__proto__ || Object.getPrototypeOf(ReportSummary)).call(this, props));
+        var _this = _possibleConstructorReturn(this, (ReportScenario.__proto__ || Object.getPrototypeOf(ReportScenario)).call(this, props));
 
-        _this.state = { browser: props.browser, timestamp: props.timestamp };
+        _this.state = { scenarioData: props.scenarioData, uri: props.uri };
+        // Note tags and elements are arrays.
         return _this;
     }
 
-    _createClass(ReportSummary, [{
+    _createClass(ReportScenario, [{
         key: 'render',
         value: function render() {
-            var testTimeStamp = new Date();
-            testTimeStamp.setTime(this.state.timestamp);
-            var testDateString = testTimeStamp.toDateString() + ' ' + testTimeStamp.toTimeString();
+            var _this2 = this;
+
+            var scenarioData = this.state.scenarioData;
+
+            var ReportStepView = scenarioData.steps.map(function (step) {
+                var viewKey = _this2.state.scenarioData.id + step.line;
+                return _react2.default.createElement(_ReportStep2.default, _defineProperty({ key: viewKey, stepData: step, uri: _this2.state.uri, __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 16
+                    },
+                    __self: _this2
+                }, '__self', _this2));
+            });
+            return _react2.default.createElement(
+                'div',
+                _defineProperty({ className: 'container', __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 19
+                    },
+                    __self: this
+                }, '__self', this),
+                _react2.default.createElement(
+                    'div',
+                    _defineProperty({
+                        __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 20
+                        },
+                        __self: this
+                    }, '__self', this),
+                    _react2.default.createElement(
+                        'span',
+                        _defineProperty({
+                            __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 21
+                            },
+                            __self: this
+                        }, '__self', this),
+                        this.state.scenarioData.keyword,
+                        ' ',
+                        this.state.scenarioData.name
+                    )
+                ),
+                _react2.default.createElement(
+                    'div',
+                    _defineProperty({
+                        __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 23
+                        },
+                        __self: this
+                    }, '__self', this),
+                    _react2.default.createElement(
+                        'span',
+                        _defineProperty({
+                            __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 24
+                            },
+                            __self: this
+                        }, '__self', this),
+                        'ID: ',
+                        this.state.scenarioData.id
+                    )
+                ),
+                _react2.default.createElement(
+                    'div',
+                    _defineProperty({
+                        __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 26
+                        },
+                        __self: this
+                    }, '__self', this),
+                    _react2.default.createElement(
+                        'span',
+                        _defineProperty({
+                            __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 27
+                            },
+                            __self: this
+                        }, '__self', this),
+                        'ID: ',
+                        this.state.scenarioData.type
+                    )
+                ),
+                _react2.default.createElement(
+                    'div',
+                    _defineProperty({
+                        __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 29
+                        },
+                        __self: this
+                    }, '__self', this),
+                    _react2.default.createElement(
+                        'span',
+                        _defineProperty({
+                            __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 30
+                            },
+                            __self: this
+                        }, '__self', this),
+                        'Source: ',
+                        this.state.uri,
+                        ' @ line ',
+                        this.state.scenarioData.line
+                    )
+                ),
+                _react2.default.createElement(
+                    'div',
+                    _defineProperty({
+                        __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 32
+                        },
+                        __self: this
+                    }, '__self', this),
+                    _react2.default.createElement(
+                        'span',
+                        _defineProperty({
+                            __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 33
+                            },
+                            __self: this
+                        }, '__self', this),
+                        'Tags: ',
+                        this.state.scenarioData.tags
+                    )
+                ),
+                _react2.default.createElement(
+                    'div',
+                    _defineProperty({
+                        __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 35
+                        },
+                        __self: this
+                    }, '__self', this),
+                    ReportStepView
+                )
+            );
+        }
+    }]);
+
+    return ReportScenario;
+}(_react2.default.Component);
+
+exports.default = ReportScenario;
+
+},{"./ReportStep":7,"react":48}],7:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+var _jsxFileName = 'D:\\portfolio pieces\\metix_automation_handout\\cucumber\\dashboard\\src\\Components\\ReportStep.js';
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _ReportStepResult = require('./ReportStepResult');
+
+var _ReportStepResult2 = _interopRequireDefault(_ReportStepResult);
+
+var _ReportStepArguement = require('./ReportStepArguement');
+
+var _ReportStepArguement2 = _interopRequireDefault(_ReportStepArguement);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var ReportStep = function (_React$Component) {
+    _inherits(ReportStep, _React$Component);
+
+    function ReportStep(props) {
+        _classCallCheck(this, ReportStep);
+
+        var _this = _possibleConstructorReturn(this, (ReportStep.__proto__ || Object.getPrototypeOf(ReportStep)).call(this, props));
+
+        _this.state = { stepData: props.stepData, uri: props.uri };
+        // Note tags and elements are arrays.
+        return _this;
+    }
+
+    _createClass(ReportStep, [{
+        key: 'render',
+        value: function render() {
             return _react2.default.createElement(
                 'div',
                 _defineProperty({ className: 'container', __source: {
@@ -378,8 +757,9 @@ var ReportSummary = function (_React$Component) {
                             },
                             __self: this
                         }, '__self', this),
-                        'Browser: ',
-                        this.state.browser
+                        this.state.stepData.keyword,
+                        ' ',
+                        this.state.stepData.name
                     )
                 ),
                 _react2.default.createElement(
@@ -391,17 +771,526 @@ var ReportSummary = function (_React$Component) {
                         },
                         __self: this
                     }, '__self', this),
+                    _react2.default.createElement(_ReportStepArguement2.default, _defineProperty({ argData: this.state.stepData.arguements, __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 20
+                        },
+                        __self: this
+                    }, '__self', this))
+                ),
+                _react2.default.createElement(
+                    'div',
+                    _defineProperty({
+                        __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 22
+                        },
+                        __self: this
+                    }, '__self', this),
                     _react2.default.createElement(
                         'span',
                         _defineProperty({
                             __source: {
                                 fileName: _jsxFileName,
-                                lineNumber: 20
+                                lineNumber: 23
                             },
                             __self: this
                         }, '__self', this),
-                        'TimeStamp: ',
-                        testDateString
+                        'Match: ',
+                        this.state.stepData.match.location
+                    )
+                ),
+                _react2.default.createElement(
+                    'div',
+                    _defineProperty({
+                        __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 25
+                        },
+                        __self: this
+                    }, '__self', this),
+                    _react2.default.createElement(
+                        'span',
+                        _defineProperty({
+                            __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 26
+                            },
+                            __self: this
+                        }, '__self', this),
+                        'Source: ',
+                        this.state.uri,
+                        ' @ line ',
+                        this.state.stepData.line
+                    )
+                ),
+                _react2.default.createElement(
+                    'div',
+                    _defineProperty({
+                        __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 28
+                        },
+                        __self: this
+                    }, '__self', this),
+                    _react2.default.createElement(_ReportStepResult2.default, _defineProperty({ resultData: this.state.stepData.result, __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 29
+                        },
+                        __self: this
+                    }, '__self', this))
+                )
+            );
+        }
+    }]);
+
+    return ReportStep;
+}(_react2.default.Component);
+
+exports.default = ReportStep;
+
+},{"./ReportStepArguement":8,"./ReportStepResult":9,"react":48}],8:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+var _jsxFileName = 'D:\\portfolio pieces\\metix_automation_handout\\cucumber\\dashboard\\src\\Components\\ReportStepArguement.js';
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var ReportStepArguement = function (_React$Component) {
+    _inherits(ReportStepArguement, _React$Component);
+
+    function ReportStepArguement(props) {
+        _classCallCheck(this, ReportStepArguement);
+
+        var _this = _possibleConstructorReturn(this, (ReportStepArguement.__proto__ || Object.getPrototypeOf(ReportStepArguement)).call(this, props));
+
+        _this.state = { argData: props.argData };
+        // Note tags and elements are arrays.
+        return _this;
+    }
+
+    _createClass(ReportStepArguement, [{
+        key: 'render',
+        value: function render() {
+            var _this2 = this;
+
+            var argData = this.state.argData;
+
+            var ReportStepArgView = 'No Arguements';
+            var argCount = 0;
+            if (typeof argData !== 'undefined') {
+                ReportStepArgView = argData.map(function (arg) {
+                    argCount++;
+                    return _react2.default.createElement(
+                        'span',
+                        _defineProperty({
+                            __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 18
+                            },
+                            __self: _this2
+                        }, '__self', _this2),
+                        '#',
+                        argCount,
+                        ' ',
+                        arg
+                    );
+                });
+            }
+            return _react2.default.createElement(
+                'div',
+                _defineProperty({ className: 'container', __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 22
+                    },
+                    __self: this
+                }, '__self', this),
+                _react2.default.createElement(
+                    'div',
+                    _defineProperty({
+                        __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 23
+                        },
+                        __self: this
+                    }, '__self', this),
+                    _react2.default.createElement(
+                        'span',
+                        _defineProperty({
+                            __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 24
+                            },
+                            __self: this
+                        }, '__self', this),
+                        'Arguements'
+                    )
+                ),
+                _react2.default.createElement(
+                    'div',
+                    _defineProperty({
+                        __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 26
+                        },
+                        __self: this
+                    }, '__self', this),
+                    ReportStepArgView
+                )
+            );
+        }
+    }]);
+
+    return ReportStepArguement;
+}(_react2.default.Component);
+
+exports.default = ReportStepArguement;
+
+},{"react":48}],9:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+var _jsxFileName = "D:\\portfolio pieces\\metix_automation_handout\\cucumber\\dashboard\\src\\Components\\ReportStepResult.js";
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require("react");
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var ReportStepResult = function (_React$Component) {
+    _inherits(ReportStepResult, _React$Component);
+
+    function ReportStepResult(props) {
+        _classCallCheck(this, ReportStepResult);
+
+        var _this = _possibleConstructorReturn(this, (ReportStepResult.__proto__ || Object.getPrototypeOf(ReportStepResult)).call(this, props));
+
+        _this.state = { resultData: props.resultData };
+        // Note tags and elements are arrays.
+        return _this;
+    }
+
+    _createClass(ReportStepResult, [{
+        key: "render",
+        value: function render() {
+            return _react2.default.createElement(
+                "div",
+                _defineProperty({ className: "container", __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 13
+                    },
+                    __self: this
+                }, "__self", this),
+                _react2.default.createElement(
+                    "div",
+                    _defineProperty({
+                        __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 14
+                        },
+                        __self: this
+                    }, "__self", this),
+                    _react2.default.createElement(
+                        "span",
+                        _defineProperty({
+                            __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 15
+                            },
+                            __self: this
+                        }, "__self", this),
+                        "Status: ",
+                        this.state.resultData.status
+                    )
+                ),
+                _react2.default.createElement(
+                    "div",
+                    _defineProperty({
+                        __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 17
+                        },
+                        __self: this
+                    }, "__self", this),
+                    _react2.default.createElement(
+                        "span",
+                        _defineProperty({
+                            __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 18
+                            },
+                            __self: this
+                        }, "__self", this),
+                        "Duration: ",
+                        this.state.resultData.duration
+                    )
+                ),
+                _react2.default.createElement(
+                    "div",
+                    _defineProperty({
+                        __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 20
+                        },
+                        __self: this
+                    }, "__self", this),
+                    _react2.default.createElement(
+                        "span",
+                        _defineProperty({
+                            __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 21
+                            },
+                            __self: this
+                        }, "__self", this),
+                        "Error Message: ",
+                        this.state.resultData.error_message
+                    )
+                )
+            );
+        }
+    }]);
+
+    return ReportStepResult;
+}(_react2.default.Component);
+
+exports.default = ReportStepResult;
+
+},{"react":48}],10:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+var _jsxFileName = 'D:\\portfolio pieces\\metix_automation_handout\\cucumber\\dashboard\\src\\Components\\ReportSummary.js';
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactToggleDisplay = require('react-toggle-display');
+
+var _reactToggleDisplay2 = _interopRequireDefault(_reactToggleDisplay);
+
+var _ReportFeature = require('./ReportFeature');
+
+var _ReportFeature2 = _interopRequireDefault(_ReportFeature);
+
+var _ReportActions = require('../ReportActions');
+
+var _ReportStore = require('../ReportStore');
+
+var _ReportStore2 = _interopRequireDefault(_ReportStore);
+
+var _ErrorReport = require('./ErrorReport');
+
+var _ErrorReport2 = _interopRequireDefault(_ErrorReport);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var ReportSummary = function (_React$Component) {
+    _inherits(ReportSummary, _React$Component);
+
+    function ReportSummary(props) {
+        _classCallCheck(this, ReportSummary);
+
+        var _this = _possibleConstructorReturn(this, (ReportSummary.__proto__ || Object.getPrototypeOf(ReportSummary)).call(this, props));
+
+        _this.state = { browser: props.browser, timestamp: props.timestamp, filename: props.filename, showReport: false, reportLoaded: false, reportData: [], error: true, errorMsg: "Not loaded." };
+        return _this;
+    }
+
+    _createClass(ReportSummary, [{
+        key: 'toggleReportDisplay',
+        value: function toggleReportDisplay() {
+            if (this.state.showReport === false) {
+                this.setState({ showReport: true });
+                if (this.state.reportLoaded === false) {
+                    (0, _ReportActions.getReportFile)(this.state.filename);
+                }
+            } else {
+                this.setState({ showReport: false });
+            }
+        }
+    }, {
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            _ReportStore2.default.on("REPORT_FILE" + this.state.filename, this.handleReportFile.bind(this));
+        }
+    }, {
+        key: 'componentWillUnmount',
+        value: function componentWillUnmount() {
+            _ReportStore2.default.removeListener('REPORT_FILE' + this.state.filename, this.handleReportFile.bind(this));
+        }
+    }, {
+        key: 'handleReportFile',
+        value: function handleReportFile(payload) {
+            if (payload.success === true) {
+                this.setState({ reportData: payload.data, error: false, errorMsg: "", reportLoaded: true });
+            } else {
+                this.setState({ reportData: [], error: true, errorMsg: payload.data, reportLoaded: false });
+            }
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            var _this2 = this;
+
+            var testTimeStamp = new Date();
+            testTimeStamp.setTime(this.state.timestamp);
+            var testDateString = testTimeStamp.toDateString() + ' ' + testTimeStamp.toTimeString();
+            var reportData = this.state.reportData;
+
+            var ReportFeatureView = reportData.map(function (report) {
+                return _react2.default.createElement(_ReportFeature2.default, _defineProperty({ key: report.id, reportData: report, __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 48
+                    },
+                    __self: _this2
+                }, '__self', _this2));
+            });
+            return _react2.default.createElement(
+                'div',
+                _defineProperty({ className: 'container', __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 51
+                    },
+                    __self: this
+                }, '__self', this),
+                _react2.default.createElement(
+                    'div',
+                    _defineProperty({ onClick: this.toggleReportDisplay.bind(this), __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 52
+                        },
+                        __self: this
+                    }, '__self', this),
+                    _react2.default.createElement(
+                        'div',
+                        _defineProperty({
+                            __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 53
+                            },
+                            __self: this
+                        }, '__self', this),
+                        _react2.default.createElement(
+                            'span',
+                            _defineProperty({
+                                __source: {
+                                    fileName: _jsxFileName,
+                                    lineNumber: 54
+                                },
+                                __self: this
+                            }, '__self', this),
+                            'Browser: ',
+                            this.state.browser
+                        )
+                    ),
+                    _react2.default.createElement(
+                        'div',
+                        _defineProperty({
+                            __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 56
+                            },
+                            __self: this
+                        }, '__self', this),
+                        _react2.default.createElement(
+                            'span',
+                            _defineProperty({
+                                __source: {
+                                    fileName: _jsxFileName,
+                                    lineNumber: 57
+                                },
+                                __self: this
+                            }, '__self', this),
+                            'TimeStamp: ',
+                            testDateString
+                        )
+                    )
+                ),
+                _react2.default.createElement(
+                    _reactToggleDisplay2.default,
+                    _defineProperty({ 'if': this.state.showReport === true, __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 60
+                        },
+                        __self: this
+                    }, '__self', this),
+                    _react2.default.createElement(
+                        _reactToggleDisplay2.default,
+                        _defineProperty({ 'if': this.state.reportLoaded === true, __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 61
+                            },
+                            __self: this
+                        }, '__self', this),
+                        _react2.default.createElement(
+                            _reactToggleDisplay2.default,
+                            _defineProperty({ 'if': this.state.error === true, __source: {
+                                    fileName: _jsxFileName,
+                                    lineNumber: 62
+                                },
+                                __self: this
+                            }, '__self', this),
+                            _react2.default.createElement(_ErrorReport2.default, _defineProperty({ error: this.state.errorMsg, __source: {
+                                    fileName: _jsxFileName,
+                                    lineNumber: 63
+                                },
+                                __self: this
+                            }, '__self', this))
+                        ),
+                        _react2.default.createElement(
+                            _reactToggleDisplay2.default,
+                            _defineProperty({ 'if': this.state.error === false, __source: {
+                                    fileName: _jsxFileName,
+                                    lineNumber: 65
+                                },
+                                __self: this
+                            }, '__self', this),
+                            ReportFeatureView
+                        )
                     )
                 )
             );
@@ -413,7 +1302,7 @@ var ReportSummary = function (_React$Component) {
 
 exports.default = ReportSummary;
 
-},{"react":43}],6:[function(require,module,exports){
+},{"../ReportActions":11,"../ReportStore":12,"./ErrorReport":3,"./ReportFeature":4,"react":48,"react-toggle-display":45}],11:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -421,6 +1310,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.getReportsIndex = getReportsIndex;
 exports.replyReportsIndex = replyReportsIndex;
+exports.getReportFile = getReportFile;
+exports.replyReportFile = replyReportFile;
 
 var _dispatcher = require("./dispatcher");
 
@@ -430,19 +1321,41 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function getReportsIndex() {
    _dispatcher2.default.dispatch({
-      type: "GetReportIndex"
+      type: "GetReportsIndex"
    });
 }
 
 function replyReportsIndex(success, data) {
    _dispatcher2.default.dispatch({
-      type: "ReplyReportIndex",
+      type: "ReplyReportsIndex",
       success: success,
       data: data
    });
 }
 
-},{"./dispatcher":9}],7:[function(require,module,exports){
+function getReportFile(filename) {
+   _dispatcher2.default.dispatch({
+      type: "GetReportFile",
+      filename: filename
+   });
+}
+/*
+export function loadReportFile() {
+	Dispatcher.dispatch({
+    	type: "LoadReportFile"
+  	})
+}
+*/
+function replyReportFile(success, data, filename) {
+   _dispatcher2.default.dispatch({
+      type: "ReplyReportFile",
+      success: success,
+      filename: filename,
+      data: data
+   });
+}
+
+},{"./dispatcher":14}],12:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -506,6 +1419,17 @@ var ReportStore = function (_EventEmitter) {
             });
         }
     }, {
+        key: "getTestReportFile",
+        value: function getTestReportFile(filename) {
+            this.makeRequest('GET', '/logs/' + filename, function (response, data, error) {
+                if (error === false) {
+                    (0, _ReportActions.replyReportFile)(true, data, filename);
+                } else {
+                    (0, _ReportActions.replyReportFile)(false, response, filename);
+                }
+            });
+        }
+    }, {
         key: "handleActions",
         value: function handleActions(action) {
             switch (action.type) {
@@ -513,23 +1437,43 @@ var ReportStore = function (_EventEmitter) {
                     {
                         break;
                     }
-                case "GetReportIndex":
+                case "GetReportsIndex":
                     {
                         this.getTestReportIndex();
                         break;
                     }
-                case "ReplyReportIndex":
+                case "ReplyReportsIndex":
                     {
                         if (action.success === true) {
                             try {
                                 var reportsIndex = JSON.parse(action.data);
                                 this.reportIndex = reportsIndex.reportIndex;
                                 this.emit('REPORT_INDEX', { success: true, data: this.reportIndex });
+                                //this.loadNextReportFile();
                             } catch (e) {
                                 this.emit('REPORT_INDEX', { success: false, data: 'JSON Parse error: ' + action.data });
                             }
                         } else {
                             this.emit('REPORT_INDEX', { success: false, data: 'Connection Error code ' + action.data });
+                        }
+                        break;
+                    }
+                case "GetReportFile":
+                    {
+                        this.getTestReportFile(action.filename);
+                        break;
+                    }
+                case "ReplyReportFile":
+                    {
+                        if (action.success === true) {
+                            try {
+                                var reportFile = JSON.parse(action.data);
+                                this.emit('REPORT_FILE' + action.filename, { success: true, data: reportFile, filename: action.filename });
+                            } catch (e) {
+                                this.emit('REPORT_FILE' + action.filename, { success: false, data: 'JSON Parse error: ' + action.data, filename: action.filename });
+                            }
+                        } else {
+                            this.emit('REPORT_FILE' + action.filename, { success: false, data: 'Connection Error code ' + action.data, filename: action.filename });
                         }
                         break;
                     }
@@ -546,7 +1490,7 @@ window.dispatcher = _dispatcher2.default;
 
 exports.default = ReportStorer;
 
-},{"./ReportActions":6,"./dispatcher":9,"events":13}],8:[function(require,module,exports){
+},{"./ReportActions":11,"./dispatcher":14,"events":18}],13:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -588,7 +1532,7 @@ function Root() {
   );
 }
 
-},{"./App":2,"react":43}],9:[function(require,module,exports){
+},{"./App":2,"react":48}],14:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -599,9 +1543,9 @@ var _flux = require("flux");
 
 exports.default = new _flux.Dispatcher();
 
-},{"flux":28}],10:[function(require,module,exports){
+},{"flux":33}],15:[function(require,module,exports){
 var css = ""; (require("browserify-css").createStyle(css, { "href": "cucumber\\dashboard\\src\\index.css" }, { "insertAt": "bottom" })); module.exports = css;
-},{"browserify-css":12}],11:[function(require,module,exports){
+},{"browserify-css":17}],16:[function(require,module,exports){
 'use strict';
 
 var _jsxFileName = 'D:\\portfolio pieces\\metix_automation_handout\\cucumber\\dashboard\\src\\index.js';
@@ -632,7 +1576,7 @@ _reactDom2.default.render(_react2.default.createElement(_Root2.default, _defineP
   __self: undefined
 }, '__self', undefined)), document.getElementById('root'));
 
-},{"./Root":8,"./index.css":10,"react":43,"react-dom":39}],12:[function(require,module,exports){
+},{"./Root":13,"./index.css":15,"react":48,"react-dom":44}],17:[function(require,module,exports){
 'use strict';
 // For more information about browser field, check out the browser field at https://github.com/substack/browserify-handbook#browser-field.
 
@@ -709,7 +1653,7 @@ module.exports = {
     }
 };
 
-},{}],13:[function(require,module,exports){
+},{}],18:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -1013,7 +1957,7 @@ function isUndefined(arg) {
   return arg === void 0;
 }
 
-},{}],14:[function(require,module,exports){
+},{}],19:[function(require,module,exports){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -1047,7 +1991,7 @@ var ExecutionEnvironment = {
 };
 
 module.exports = ExecutionEnvironment;
-},{}],15:[function(require,module,exports){
+},{}],20:[function(require,module,exports){
 "use strict";
 
 /**
@@ -1077,7 +2021,7 @@ function camelize(string) {
 }
 
 module.exports = camelize;
-},{}],16:[function(require,module,exports){
+},{}],21:[function(require,module,exports){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -1115,7 +2059,7 @@ function camelizeStyleName(string) {
 }
 
 module.exports = camelizeStyleName;
-},{"./camelize":15}],17:[function(require,module,exports){
+},{"./camelize":20}],22:[function(require,module,exports){
 'use strict';
 
 /**
@@ -1153,7 +2097,7 @@ function containsNode(outerNode, innerNode) {
 }
 
 module.exports = containsNode;
-},{"./isTextNode":25}],18:[function(require,module,exports){
+},{"./isTextNode":30}],23:[function(require,module,exports){
 "use strict";
 
 /**
@@ -1190,7 +2134,7 @@ emptyFunction.thatReturnsArgument = function (arg) {
 };
 
 module.exports = emptyFunction;
-},{}],19:[function(require,module,exports){
+},{}],24:[function(require,module,exports){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -1208,7 +2152,7 @@ if ("development" !== 'production') {
 }
 
 module.exports = emptyObject;
-},{}],20:[function(require,module,exports){
+},{}],25:[function(require,module,exports){
 'use strict';
 
 /**
@@ -1245,7 +2189,7 @@ function getActiveElement(doc) /*?DOMElement*/{
 }
 
 module.exports = getActiveElement;
-},{}],21:[function(require,module,exports){
+},{}],26:[function(require,module,exports){
 'use strict';
 
 /**
@@ -1276,7 +2220,7 @@ function hyphenate(string) {
 }
 
 module.exports = hyphenate;
-},{}],22:[function(require,module,exports){
+},{}],27:[function(require,module,exports){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -1313,7 +2257,7 @@ function hyphenateStyleName(string) {
 }
 
 module.exports = hyphenateStyleName;
-},{"./hyphenate":21}],23:[function(require,module,exports){
+},{"./hyphenate":26}],28:[function(require,module,exports){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -1367,7 +2311,7 @@ function invariant(condition, format, a, b, c, d, e, f) {
 }
 
 module.exports = invariant;
-},{}],24:[function(require,module,exports){
+},{}],29:[function(require,module,exports){
 'use strict';
 
 /**
@@ -1390,7 +2334,7 @@ function isNode(object) {
 }
 
 module.exports = isNode;
-},{}],25:[function(require,module,exports){
+},{}],30:[function(require,module,exports){
 'use strict';
 
 /**
@@ -1413,7 +2357,7 @@ function isTextNode(object) {
 }
 
 module.exports = isTextNode;
-},{"./isNode":24}],26:[function(require,module,exports){
+},{"./isNode":29}],31:[function(require,module,exports){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -1479,7 +2423,7 @@ function shallowEqual(objA, objB) {
 }
 
 module.exports = shallowEqual;
-},{}],27:[function(require,module,exports){
+},{}],32:[function(require,module,exports){
 /**
  * Copyright (c) 2014-present, Facebook, Inc.
  *
@@ -1542,7 +2486,7 @@ if ("development" !== 'production') {
 }
 
 module.exports = warning;
-},{"./emptyFunction":18}],28:[function(require,module,exports){
+},{"./emptyFunction":23}],33:[function(require,module,exports){
 /**
  * Copyright (c) 2014-present, Facebook, Inc.
  * All rights reserved.
@@ -1554,7 +2498,7 @@ module.exports = warning;
 
 module.exports.Dispatcher = require('./lib/Dispatcher');
 
-},{"./lib/Dispatcher":29}],29:[function(require,module,exports){
+},{"./lib/Dispatcher":34}],34:[function(require,module,exports){
 (function (process){
 /**
  * Copyright (c) 2014-present, Facebook, Inc.
@@ -1788,7 +2732,7 @@ var Dispatcher = (function () {
 
 module.exports = Dispatcher;
 }).call(this,require('_process'))
-},{"_process":31,"fbjs/lib/invariant":23}],30:[function(require,module,exports){
+},{"_process":36,"fbjs/lib/invariant":28}],35:[function(require,module,exports){
 /*
 object-assign
 (c) Sindre Sorhus
@@ -1880,7 +2824,7 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 	return to;
 };
 
-},{}],31:[function(require,module,exports){
+},{}],36:[function(require,module,exports){
 // shim for using process in browser
 var process = module.exports = {};
 
@@ -2066,7 +3010,7 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],32:[function(require,module,exports){
+},{}],37:[function(require,module,exports){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -2127,7 +3071,7 @@ function checkPropTypes(typeSpecs, values, location, componentName, getStack) {
 
 module.exports = checkPropTypes;
 
-},{"./lib/ReactPropTypesSecret":36,"fbjs/lib/invariant":23,"fbjs/lib/warning":27}],33:[function(require,module,exports){
+},{"./lib/ReactPropTypesSecret":41,"fbjs/lib/invariant":28,"fbjs/lib/warning":32}],38:[function(require,module,exports){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -2187,7 +3131,7 @@ module.exports = function() {
   return ReactPropTypes;
 };
 
-},{"./lib/ReactPropTypesSecret":36,"fbjs/lib/emptyFunction":18,"fbjs/lib/invariant":23}],34:[function(require,module,exports){
+},{"./lib/ReactPropTypesSecret":41,"fbjs/lib/emptyFunction":23,"fbjs/lib/invariant":28}],39:[function(require,module,exports){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -2731,7 +3675,7 @@ module.exports = function(isValidElement, throwOnDirectAccess) {
   return ReactPropTypes;
 };
 
-},{"./checkPropTypes":32,"./lib/ReactPropTypesSecret":36,"fbjs/lib/emptyFunction":18,"fbjs/lib/invariant":23,"fbjs/lib/warning":27,"object-assign":30}],35:[function(require,module,exports){
+},{"./checkPropTypes":37,"./lib/ReactPropTypesSecret":41,"fbjs/lib/emptyFunction":23,"fbjs/lib/invariant":28,"fbjs/lib/warning":32,"object-assign":35}],40:[function(require,module,exports){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -2761,7 +3705,7 @@ if ("development" !== 'production') {
   module.exports = require('./factoryWithThrowingShims')();
 }
 
-},{"./factoryWithThrowingShims":33,"./factoryWithTypeCheckers":34}],36:[function(require,module,exports){
+},{"./factoryWithThrowingShims":38,"./factoryWithTypeCheckers":39}],41:[function(require,module,exports){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -2775,7 +3719,7 @@ var ReactPropTypesSecret = 'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED';
 
 module.exports = ReactPropTypesSecret;
 
-},{}],37:[function(require,module,exports){
+},{}],42:[function(require,module,exports){
 /** @license React v16.3.0
  * react-dom.development.js
  *
@@ -19297,7 +20241,7 @@ module.exports = reactDom;
   })();
 }
 
-},{"fbjs/lib/ExecutionEnvironment":14,"fbjs/lib/camelizeStyleName":16,"fbjs/lib/containsNode":17,"fbjs/lib/emptyFunction":18,"fbjs/lib/emptyObject":19,"fbjs/lib/getActiveElement":20,"fbjs/lib/hyphenateStyleName":22,"fbjs/lib/invariant":23,"fbjs/lib/shallowEqual":26,"fbjs/lib/warning":27,"object-assign":30,"prop-types/checkPropTypes":32,"react":43}],38:[function(require,module,exports){
+},{"fbjs/lib/ExecutionEnvironment":19,"fbjs/lib/camelizeStyleName":21,"fbjs/lib/containsNode":22,"fbjs/lib/emptyFunction":23,"fbjs/lib/emptyObject":24,"fbjs/lib/getActiveElement":25,"fbjs/lib/hyphenateStyleName":27,"fbjs/lib/invariant":28,"fbjs/lib/shallowEqual":31,"fbjs/lib/warning":32,"object-assign":35,"prop-types/checkPropTypes":37,"react":48}],43:[function(require,module,exports){
 /** @license React v16.3.0
  * react-dom.production.min.js
  *
@@ -19544,7 +20488,7 @@ var Gg={createPortal:Fg,findDOMNode:function(a){if(null==a)return null;if(1===a.
 D("40");return a._reactRootContainer?(X.unbatchedUpdates(function(){Eg(null,null,a,!1,function(){a._reactRootContainer=null})}),!0):!1},unstable_createPortal:function(){return Fg.apply(void 0,arguments)},unstable_batchedUpdates:X.batchedUpdates,unstable_deferredUpdates:X.deferredUpdates,flushSync:X.flushSync,unstable_flushControlled:X.flushControlled,__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED:{EventPluginHub:Qa,EventPluginRegistry:xa,EventPropagators:jb,ReactControlledComponent:Zb,ReactDOMComponentTree:ab,
 ReactDOMEventListener:Zd},unstable_createRoot:function(a,b){return new sg(a,!0,null!=b&&!0===b.hydrate)}};X.injectIntoDevTools({findFiberByHostInstance:Ta,bundleType:0,version:"16.3.0",rendererPackageName:"react-dom"});var Hg=Object.freeze({default:Gg}),Ig=Hg&&Gg||Hg;module.exports=Ig["default"]?Ig["default"]:Ig;
 
-},{"fbjs/lib/ExecutionEnvironment":14,"fbjs/lib/containsNode":17,"fbjs/lib/emptyFunction":18,"fbjs/lib/emptyObject":19,"fbjs/lib/getActiveElement":20,"fbjs/lib/shallowEqual":26,"object-assign":30,"react":43}],39:[function(require,module,exports){
+},{"fbjs/lib/ExecutionEnvironment":19,"fbjs/lib/containsNode":22,"fbjs/lib/emptyFunction":23,"fbjs/lib/emptyObject":24,"fbjs/lib/getActiveElement":25,"fbjs/lib/shallowEqual":31,"object-assign":35,"react":48}],44:[function(require,module,exports){
 'use strict';
 
 function checkDCE() {
@@ -19584,7 +20528,7 @@ if ("development" === 'production') {
   module.exports = require('./cjs/react-dom.development.js');
 }
 
-},{"./cjs/react-dom.development.js":37,"./cjs/react-dom.production.min.js":38}],40:[function(require,module,exports){
+},{"./cjs/react-dom.development.js":42,"./cjs/react-dom.production.min.js":43}],45:[function(require,module,exports){
 (function (global, factory) {
 	if (typeof define === "function" && define.amd) {
 		define(['exports', 'react', 'prop-types'], factory);
@@ -19683,7 +20627,7 @@ if ("development" === 'production') {
 	}
 });
 
-},{"prop-types":35,"react":43}],41:[function(require,module,exports){
+},{"prop-types":40,"react":48}],46:[function(require,module,exports){
 /** @license React v16.3.0
  * react.development.js
  *
@@ -21098,7 +22042,7 @@ module.exports = react;
   })();
 }
 
-},{"fbjs/lib/emptyFunction":18,"fbjs/lib/emptyObject":19,"fbjs/lib/invariant":23,"fbjs/lib/warning":27,"object-assign":30,"prop-types/checkPropTypes":32}],42:[function(require,module,exports){
+},{"fbjs/lib/emptyFunction":23,"fbjs/lib/emptyObject":24,"fbjs/lib/invariant":28,"fbjs/lib/warning":32,"object-assign":35,"prop-types/checkPropTypes":37}],47:[function(require,module,exports){
 /** @license React v16.3.0
  * react.production.min.js
  *
@@ -21122,7 +22066,7 @@ _calculateChangedBits:b,_defaultValue:a,_currentValue:a,_changedBits:0,Provider:
 c)&&!J.hasOwnProperty(c)&&(d[c]=void 0===b[c]&&void 0!==k?k[c]:b[c])}c=arguments.length-2;if(1===c)d.children=e;else if(1<c){k=Array(c);for(var l=0;l<c;l++)k[l]=arguments[l+2];d.children=k}return{$$typeof:r,type:a.type,key:g,ref:h,props:d,_owner:f}},createFactory:function(a){var b=K.bind(null,a);b.type=a;return b},isValidElement:L,version:"16.3.0",__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED:{ReactCurrentOwner:H,assign:m}},W=Object.freeze({default:V}),X=W&&V||W;
 module.exports=X["default"]?X["default"]:X;
 
-},{"fbjs/lib/emptyFunction":18,"fbjs/lib/emptyObject":19,"object-assign":30}],43:[function(require,module,exports){
+},{"fbjs/lib/emptyFunction":23,"fbjs/lib/emptyObject":24,"object-assign":35}],48:[function(require,module,exports){
 'use strict';
 
 if ("development" === 'production') {
@@ -21131,4 +22075,4 @@ if ("development" === 'production') {
   module.exports = require('./cjs/react.development.js');
 }
 
-},{"./cjs/react.development.js":41,"./cjs/react.production.min.js":42}]},{},[2,3,4,5,9,11,6,7,8]);
+},{"./cjs/react.development.js":46,"./cjs/react.production.min.js":47}]},{},[2,3,4,5,6,7,8,9,10,14,16,11,12,13]);

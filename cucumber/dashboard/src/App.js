@@ -1,6 +1,6 @@
 import React from 'react';
 import ToggleDisplay from 'react-toggle-display';
-import { getReportsIndex } from './ReportActions';
+import { getReportsIndex, loadReportFile } from './ReportActions';
 import ReportStore from './ReportStore';
 import ReportIndex from './Components/ReportIndex';
 import ErrorReport from './Components/ErrorReport';

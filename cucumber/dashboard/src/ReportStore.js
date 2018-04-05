@@ -1,6 +1,6 @@
 import { EventEmitter } from "events";
 import Dispatcher from "./dispatcher";
-import { replyReportsIndex } from './ReportActions';
+import { replyReportsIndex, loadReportFile, getReportFile, replyReportFile } from './ReportActions';
 
 class ReportStore extends EventEmitter {
 
@@ -33,22 +33,33 @@ class ReportStore extends EventEmitter {
         });
     }
 
+    getTestReportFile(filename) {
+        this.makeRequest('GET', '/logs/' + filename, function(response, data, error) {
+            if(error === false) {
+                replyReportFile(true, data, filename);
+            } else {
+                replyReportFile(false, response, filename);
+            }
+        });
+    }
+
     handleActions(action) {
         switch(action.type) {
             default: {
                 break;
                 }
-            case "GetReportIndex": {
+            case "GetReportsIndex": {
                 this.getTestReportIndex();
                 break;
                 }
-            case "ReplyReportIndex":
+            case "ReplyReportsIndex":
                 {
                 if(action.success === true) {
                     try {
                         const reportsIndex = JSON.parse(action.data);
                         this.reportIndex = reportsIndex.reportIndex;
                         this.emit('REPORT_INDEX', {success: true, data: this.reportIndex});
+                        //this.loadNextReportFile();
                     } catch (e) {
                         this.emit('REPORT_INDEX', {success: false, data: 'JSON Parse error: ' + action.data});
                     }
@@ -57,7 +68,25 @@ class ReportStore extends EventEmitter {
                 }
                 break;
                 }
-            }
+            case "GetReportFile": {
+                this.getTestReportFile(action.filename);
+                break;
+                }
+            case "ReplyReportFile":
+                {
+                if(action.success === true) {
+                    try {
+                        const reportFile = JSON.parse(action.data);
+                        this.emit('REPORT_FILE' + action.filename, {success: true, data: reportFile, filename: action.filename});
+                    } catch (e) {
+                        this.emit('REPORT_FILE' + action.filename, {success: false, data: 'JSON Parse error: ' + action.data, filename: action.filename});
+                    }
+                } else {
+                    this.emit('REPORT_FILE' + action.filename, {success: false, data: 'Connection Error code ' + action.data, filename: action.filename});
+                }
+                break;
+                }
+            }           
         }
     }
 
