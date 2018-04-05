@@ -35,7 +35,6 @@ class ReportScenario extends React.Component {
     setResult(result) {
     	if(result !== 'passed') {
     		this.setState({result: 'failed'});
-    		this.props.setResult('failed');
     	}
     }
 

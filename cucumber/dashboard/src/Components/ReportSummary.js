@@ -4,6 +4,7 @@ import ReportFeature from './ReportFeature';
 import { getReportFile } from '../ReportActions';
 import ReportStore from '../ReportStore';
 import ErrorReport from './ErrorReport';
+import { getDuration } from '../supportMethods';
 
 class ReportSummary extends React.Component {
 
@@ -39,19 +40,12 @@ class ReportSummary extends React.Component {
 	    }
     }
 
-    getDuration() {
-    	let duration = this.state.duration / 1000000000;
-    	if(isNaN(duration)) {
-    		duration = 0;
-    	}
-    	return duration;
-    }
     render() {
     	let styleClass = "card border-success mb-3";
     	if(this.state.status === "failed") {
 			styleClass = "card border-danger mb-3";
 		}
-		const duration = this.getDuration();
+		const duration = getDuration(this.state.duration);
     	const testTimeStamp = new Date;
     	testTimeStamp.setTime(this.state.timestamp);
     	const testDateString = testTimeStamp.getDate() + '/' + (testTimeStamp.getMonth() + 1) + '/' + testTimeStamp.getFullYear() + ' ' + testTimeStamp.getHours() + ':' + testTimeStamp.getMinutes();
