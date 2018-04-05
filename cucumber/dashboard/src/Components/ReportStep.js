@@ -12,7 +12,7 @@ class ReportStep extends React.Component {
     componentWillMount() {
     	this.calculateDuration();
     	this.setState({result: this.state.stepData.result.status});
-    	this.props.setResult(this.state.stepData.result.status);
+    	
     }
 
     toggleResultDisplay() {
@@ -25,13 +25,6 @@ class ReportStep extends React.Component {
 
     calculateDuration() {
 
-		// Not found documentation on what unit is being used for duration.
-		// This makes sense in terms of my own experience running tests, and seems
-		// to be a sensible number of seconds for test duration. I'll double check
-		// this at the end. There should be a documentation reference to explain.
-		// From another test result, using this calculation then Duration: 5.008
-		// Error Message: Error: function timed out, ensure the promise resolves 
-		// within 5000 milliseconds
 		if('duration' in this.state.stepData.result) {
 			const duration = this.state.stepData.result.duration / 1000000000;
 			this.setState({duration: duration});

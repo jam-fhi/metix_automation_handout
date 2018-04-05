@@ -556,6 +556,12 @@ var _ReportStep = require('./ReportStep');
 
 var _ReportStep2 = _interopRequireDefault(_ReportStep);
 
+var _supportMethods = require('../supportMethods');
+
+var _reactToggleDisplay = require('react-toggle-display');
+
+var _reactToggleDisplay2 = _interopRequireDefault(_reactToggleDisplay);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -574,42 +580,17 @@ var ReportScenario = function (_React$Component) {
 
         var _this = _possibleConstructorReturn(this, (ReportScenario.__proto__ || Object.getPrototypeOf(ReportScenario)).call(this, props));
 
-        _this.state = { scenarioData: props.scenarioData, uri: props.uri, duration: 0, result: "passed" };
-        // Note tags and elements are arrays.
+        _this.state = { scenarioData: props.scenarioData, uri: props.uri, showScenario: false, prefix: "+" };
         return _this;
     }
 
     _createClass(ReportScenario, [{
-        key: 'componentDidMount',
-        value: function componentDidMount() {
-            this.setDuration();
-        }
-    }, {
-        key: 'setDuration',
-        value: function setDuration() {
-            // Not the most elegant solution.
-            // Originally I wanted to use props, in the way setResult does.
-            // Problem with async calls, as it incremented 0 each time rather
-            // than waiting for the state to be set, then increment.
-            var scenarioData = this.state.scenarioData;
-
-            var totalDuration = 0;
-            scenarioData.steps.forEach(function (step) {
-                if ('duration' in step.result) {
-                    totalDuration += step.result.duration;
-                }
-            });
-            var durationSeconds = totalDuration / 1000000000;
-            if (isNaN(durationSeconds)) {
-                durationSeconds = 0;
-            }
-            this.setState({ duration: durationSeconds });
-        }
-    }, {
-        key: 'setResult',
-        value: function setResult(result) {
-            if (result !== 'passed') {
-                this.setState({ result: 'failed' });
+        key: 'toggleShowScenario',
+        value: function toggleShowScenario() {
+            if (this.state.showScenario === false) {
+                this.setState({ showScenario: true, prefix: "-" });
+            } else {
+                this.setState({ showScenario: false, prefix: "+" });
             }
         }
     }, {
@@ -621,15 +602,16 @@ var ReportScenario = function (_React$Component) {
             if (this.state.result === "failed") {
                 styleClass = "card border-danger mb-3";
             }
+            var duration = (0, _supportMethods.getDuration)(this.state.scenarioData.stats.duration);
             var scenarioData = this.state.scenarioData;
 
             var stepCount = 0;
             var ReportStepView = scenarioData.steps.map(function (step) {
                 var viewKey = _this2.state.scenarioData.id + step.line + stepCount;
                 stepCount++;
-                return _react2.default.createElement(_ReportStep2.default, _defineProperty({ key: viewKey, stepData: step, uri: _this2.state.uri, setResult: _this2.setResult.bind(_this2), __source: {
+                return _react2.default.createElement(_ReportStep2.default, _defineProperty({ key: viewKey, stepData: step, uri: _this2.state.uri, __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 52
+                        lineNumber: 33
                     },
                     __self: _this2
                 }, '__self', _this2));
@@ -638,15 +620,15 @@ var ReportScenario = function (_React$Component) {
                 'div',
                 _defineProperty({ className: styleClass, __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 55
+                        lineNumber: 36
                     },
                     __self: this
                 }, '__self', this),
                 _react2.default.createElement(
                     'div',
-                    _defineProperty({ className: 'card-header', __source: {
+                    _defineProperty({ className: 'card-header', onClick: this.toggleShowScenario.bind(this), __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 56
+                            lineNumber: 37
                         },
                         __self: this
                     }, '__self', this),
@@ -655,51 +637,62 @@ var ReportScenario = function (_React$Component) {
                         _defineProperty({
                             __source: {
                                 fileName: _jsxFileName,
-                                lineNumber: 57
+                                lineNumber: 38
                             },
                             __self: this
                         }, '__self', this),
-                        this.state.scenarioData.keyword,
+                        this.state.prefix,
                         ' ',
+                        this.state.scenarioData.keyword,
+                        ': ',
                         this.state.scenarioData.name,
                         ' (',
-                        this.state.result,
+                        this.state.scenarioData.stats.status,
                         ', ',
-                        this.state.duration,
+                        duration,
                         's)'
                     )
                 ),
                 _react2.default.createElement(
-                    'div',
-                    _defineProperty({ className: 'card-body', __source: {
+                    _reactToggleDisplay2.default,
+                    _defineProperty({ 'if': this.state.showScenario === true, __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 59
+                            lineNumber: 40
                         },
                         __self: this
                     }, '__self', this),
                     _react2.default.createElement(
                         'div',
-                        _defineProperty({ className: 'card border-primary mb-3', __source: {
+                        _defineProperty({ className: 'card-body', __source: {
                                 fileName: _jsxFileName,
-                                lineNumber: 60
+                                lineNumber: 41
                             },
                             __self: this
                         }, '__self', this),
                         _react2.default.createElement(
                             'div',
-                            _defineProperty({ className: 'card-header', __source: {
+                            _defineProperty({ className: 'card border-primary mb-3', __source: {
                                     fileName: _jsxFileName,
-                                    lineNumber: 61
+                                    lineNumber: 42
                                 },
                                 __self: this
                             }, '__self', this),
-                            'Source: ',
-                            this.state.uri,
-                            ' @ line ',
-                            this.state.scenarioData.line
-                        )
-                    ),
-                    ReportStepView
+                            _react2.default.createElement(
+                                'div',
+                                _defineProperty({ className: 'card-header', __source: {
+                                        fileName: _jsxFileName,
+                                        lineNumber: 43
+                                    },
+                                    __self: this
+                                }, '__self', this),
+                                'Source: ',
+                                this.state.uri,
+                                ' @ line ',
+                                this.state.scenarioData.line
+                            )
+                        ),
+                        ReportStepView
+                    )
                 )
             );
         }
@@ -710,7 +703,7 @@ var ReportScenario = function (_React$Component) {
 
 exports.default = ReportScenario;
 
-},{"./ReportStep":7,"react":47}],7:[function(require,module,exports){
+},{"../supportMethods":15,"./ReportStep":7,"react":47,"react-toggle-display":44}],7:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -756,7 +749,6 @@ var ReportStep = function (_React$Component) {
         value: function componentWillMount() {
             this.calculateDuration();
             this.setState({ result: this.state.stepData.result.status });
-            this.props.setResult(this.state.stepData.result.status);
         }
     }, {
         key: 'toggleResultDisplay',
@@ -771,13 +763,6 @@ var ReportStep = function (_React$Component) {
         key: 'calculateDuration',
         value: function calculateDuration() {
 
-            // Not found documentation on what unit is being used for duration.
-            // This makes sense in terms of my own experience running tests, and seems
-            // to be a sensible number of seconds for test duration. I'll double check
-            // this at the end. There should be a documentation reference to explain.
-            // From another test result, using this calculation then Duration: 5.008
-            // Error Message: Error: function timed out, ensure the promise resolves 
-            // within 5000 milliseconds
             if ('duration' in this.state.stepData.result) {
                 var duration = this.state.stepData.result.duration / 1000000000;
                 this.setState({ duration: duration });
@@ -800,7 +785,7 @@ var ReportStep = function (_React$Component) {
                 'div',
                 _defineProperty({ className: styleClass, onClick: this.toggleResultDisplay.bind(this), __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 53
+                        lineNumber: 46
                     },
                     __self: this
                 }, '__self', this),
@@ -808,7 +793,7 @@ var ReportStep = function (_React$Component) {
                     'div',
                     _defineProperty({ className: 'card-header', __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 54
+                            lineNumber: 47
                         },
                         __self: this
                     }, '__self', this),
@@ -817,7 +802,7 @@ var ReportStep = function (_React$Component) {
                         _defineProperty({
                             __source: {
                                 fileName: _jsxFileName,
-                                lineNumber: 55
+                                lineNumber: 48
                             },
                             __self: this
                         }, '__self', this),
@@ -837,7 +822,7 @@ var ReportStep = function (_React$Component) {
                     _reactToggleDisplay2.default,
                     _defineProperty({ 'if': this.state.showResult === true, __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 57
+                            lineNumber: 50
                         },
                         __self: this
                     }, '__self', this),
@@ -845,7 +830,7 @@ var ReportStep = function (_React$Component) {
                         'div',
                         _defineProperty({ className: 'card-body', __source: {
                                 fileName: _jsxFileName,
-                                lineNumber: 58
+                                lineNumber: 51
                             },
                             __self: this
                         }, '__self', this),
@@ -854,7 +839,7 @@ var ReportStep = function (_React$Component) {
                             _defineProperty({
                                 __source: {
                                     fileName: _jsxFileName,
-                                    lineNumber: 59
+                                    lineNumber: 52
                                 },
                                 __self: this
                             }, '__self', this),
@@ -863,7 +848,7 @@ var ReportStep = function (_React$Component) {
                                 _defineProperty({
                                     __source: {
                                         fileName: _jsxFileName,
-                                        lineNumber: 60
+                                        lineNumber: 53
                                     },
                                     __self: this
                                 }, '__self', this),
@@ -876,7 +861,7 @@ var ReportStep = function (_React$Component) {
                             _defineProperty({
                                 __source: {
                                     fileName: _jsxFileName,
-                                    lineNumber: 62
+                                    lineNumber: 55
                                 },
                                 __self: this
                             }, '__self', this),
@@ -885,7 +870,7 @@ var ReportStep = function (_React$Component) {
                                 _defineProperty({
                                     __source: {
                                         fileName: _jsxFileName,
-                                        lineNumber: 63
+                                        lineNumber: 56
                                     },
                                     __self: this
                                 }, '__self', this),
@@ -898,7 +883,7 @@ var ReportStep = function (_React$Component) {
                             _defineProperty({
                                 __source: {
                                     fileName: _jsxFileName,
-                                    lineNumber: 65
+                                    lineNumber: 58
                                 },
                                 __self: this
                             }, '__self', this),
@@ -907,7 +892,7 @@ var ReportStep = function (_React$Component) {
                                 _defineProperty({
                                     __source: {
                                         fileName: _jsxFileName,
-                                        lineNumber: 66
+                                        lineNumber: 59
                                     },
                                     __self: this
                                 }, '__self', this),
@@ -919,7 +904,7 @@ var ReportStep = function (_React$Component) {
                             _reactToggleDisplay2.default,
                             _defineProperty({ 'if': this.state.stepData.result.error_message !== null, __source: {
                                     fileName: _jsxFileName,
-                                    lineNumber: 68
+                                    lineNumber: 61
                                 },
                                 __self: this
                             }, '__self', this),
@@ -928,7 +913,7 @@ var ReportStep = function (_React$Component) {
                                 _defineProperty({
                                     __source: {
                                         fileName: _jsxFileName,
-                                        lineNumber: 69
+                                        lineNumber: 62
                                     },
                                     __self: this
                                 }, '__self', this),
@@ -1470,6 +1455,15 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.getDuration = getDuration;
 function getDuration(durationLong) {
+
+	// Not found documentation on what unit is being used for duration.
+	// This makes sense in terms of my own experience running tests, and seems
+	// to be a sensible number of seconds for test duration. I'll double check
+	// this at the end. There should be a documentation reference to explain.
+	// From another test result, using this calculation then Duration: 5.008
+	// Error Message: Error: function timed out, ensure the promise resolves 
+	// within 5000 milliseconds
+
 	var duration = durationLong / 1000000000;
 	if (isNaN(duration)) {
 		duration = 0;
