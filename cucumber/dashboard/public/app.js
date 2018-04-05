@@ -1,10 +1,10 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
-var css = ""; (require("browserify-css").createStyle(css, { "href": "cucumber\\dashboard\\src\\App.css" }, { "insertAt": "bottom" })); module.exports = css;
+var css = ".cardTitleBar {\n  display: table;\n}\n.cardImg {\n  vertical-align: middle;\n  display: table-cell;\n}\n.cardTitle {\n  vertical-align: middle;\n  display: table-cell;\n  font-size: 45px;\n}\n.cardTitleSmall {\n  vertical-align: middle;\n  display: table-cell;\n  font-size: 25px;\n}\n.cardHolder {\n  margin-top: 5rem;\n  margin-bottom: 5rem;\n}\n"; (require("browserify-css").createStyle(css, { "href": "cucumber\\dashboard\\src\\App.css" }, { "insertAt": "bottom" })); module.exports = css;
 },{"browserify-css":15}],2:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+	value: true
 });
 var _jsxFileName = 'D:\\portfolio pieces\\metix_automation_handout\\cucumber\\dashboard\\src\\App.js';
 
@@ -45,94 +45,126 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var App = function (_React$Component) {
-  _inherits(App, _React$Component);
+	_inherits(App, _React$Component);
 
-  function App() {
-    _classCallCheck(this, App);
+	function App() {
+		_classCallCheck(this, App);
 
-    var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this));
+		var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this));
 
-    _this.state = { reportIndex: [], indexLoaded: false, errorMsg: "Nothing loded." };
-    return _this;
-  }
+		_this.state = { reportIndex: [], indexLoaded: false, errorMsg: "Nothing loded." };
+		return _this;
+	}
 
-  _createClass(App, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      _ReportStore2.default.on("REPORT_INDEX", this.handleReportIndex.bind(this));
-      (0, _ReportActions.getReportsIndex)();
-    }
-  }, {
-    key: 'componentWillUnmount',
-    value: function componentWillUnmount() {
-      _ReportStore2.default.removeListener('REPORT_INDEX', this.handleReportIndex.bind(this));
-    }
-  }, {
-    key: 'handleReportIndex',
-    value: function handleReportIndex(payload) {
-      if (payload.success === true) {
-        this.setState({ reportIndex: payload.data, indexLoaded: true, errorMsg: "" });
-      } else {
-        this.setState({ reportIndex: [], indexLoaded: false, errorMsg: payload.data });
-      }
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      return _react2.default.createElement(
-        'div',
-        _defineProperty({ className: 'app', __source: {
-            fileName: _jsxFileName,
-            lineNumber: 36
-          },
-          __self: this
-        }, '__self', this),
-        _react2.default.createElement(
-          'h1',
-          _defineProperty({
-            __source: {
-              fileName: _jsxFileName,
-              lineNumber: 37
-            },
-            __self: this
-          }, '__self', this),
-          'Test Reports Dashboard'
-        ),
-        _react2.default.createElement(
-          _reactToggleDisplay2.default,
-          _defineProperty({ 'if': this.state.indexLoaded === false, __source: {
-              fileName: _jsxFileName,
-              lineNumber: 38
-            },
-            __self: this
-          }, '__self', this),
-          _react2.default.createElement(_ErrorReport2.default, _defineProperty({ error: this.state.errorMsg, __source: {
-              fileName: _jsxFileName,
-              lineNumber: 39
-            },
-            __self: this
-          }, '__self', this))
-        ),
-        _react2.default.createElement(
-          _reactToggleDisplay2.default,
-          _defineProperty({ 'if': this.state.indexLoaded === true, __source: {
-              fileName: _jsxFileName,
-              lineNumber: 41
-            },
-            __self: this
-          }, '__self', this),
-          _react2.default.createElement(_ReportIndex2.default, _defineProperty({ reportIndex: this.state.reportIndex, __source: {
-              fileName: _jsxFileName,
-              lineNumber: 42
-            },
-            __self: this
-          }, '__self', this))
-        )
-      );
-    }
-  }]);
+	_createClass(App, [{
+		key: 'componentDidMount',
+		value: function componentDidMount() {
+			_ReportStore2.default.on("REPORT_INDEX", this.handleReportIndex.bind(this));
+			(0, _ReportActions.getReportsIndex)();
+		}
+	}, {
+		key: 'componentWillUnmount',
+		value: function componentWillUnmount() {
+			_ReportStore2.default.removeListener('REPORT_INDEX', this.handleReportIndex.bind(this));
+		}
+	}, {
+		key: 'handleReportIndex',
+		value: function handleReportIndex(payload) {
+			if (payload.success === true) {
+				this.setState({ reportIndex: payload.data, indexLoaded: true, errorMsg: "" });
+			} else {
+				this.setState({ reportIndex: [], indexLoaded: false, errorMsg: payload.data });
+			}
+		}
+	}, {
+		key: 'render',
+		value: function render() {
+			return _react2.default.createElement(
+				'div',
+				_defineProperty({ className: 'container', __source: {
+						fileName: _jsxFileName,
+						lineNumber: 36
+					},
+					__self: this
+				}, '__self', this),
+				_react2.default.createElement(
+					'div',
+					_defineProperty({ className: 'card border-primary mb-3 cardHolder', style: { "maxWidth": "60rem" }, __source: {
+							fileName: _jsxFileName,
+							lineNumber: 37
+						},
+						__self: this
+					}, '__self', this),
+					_react2.default.createElement(
+						'div',
+						_defineProperty({ className: 'card-header cardTitleBar', __source: {
+								fileName: _jsxFileName,
+								lineNumber: 38
+							},
+							__self: this
+						}, '__self', this),
+						_react2.default.createElement('img', _defineProperty({ src: 'favicon.ico', className: 'cardImg', style: { "width": "64px", "height": "64px" }, __source: {
+								fileName: _jsxFileName,
+								lineNumber: 39
+							},
+							__self: this
+						}, '__self', this)),
+						_react2.default.createElement(
+							'h1',
+							_defineProperty({ className: 'cardTitle', __source: {
+									fileName: _jsxFileName,
+									lineNumber: 40
+								},
+								__self: this
+							}, '__self', this),
+							'Test Reports Dashboard'
+						)
+					),
+					_react2.default.createElement(
+						'div',
+						_defineProperty({ className: 'card-body', __source: {
+								fileName: _jsxFileName,
+								lineNumber: 42
+							},
+							__self: this
+						}, '__self', this),
+						_react2.default.createElement(
+							_reactToggleDisplay2.default,
+							_defineProperty({ 'if': this.state.indexLoaded === false, __source: {
+									fileName: _jsxFileName,
+									lineNumber: 43
+								},
+								__self: this
+							}, '__self', this),
+							_react2.default.createElement(_ErrorReport2.default, _defineProperty({ error: this.state.errorMsg, __source: {
+									fileName: _jsxFileName,
+									lineNumber: 44
+								},
+								__self: this
+							}, '__self', this))
+						),
+						_react2.default.createElement(
+							_reactToggleDisplay2.default,
+							_defineProperty({ 'if': this.state.indexLoaded === true, __source: {
+									fileName: _jsxFileName,
+									lineNumber: 46
+								},
+								__self: this
+							}, '__self', this),
+							_react2.default.createElement(_ReportIndex2.default, _defineProperty({ reportIndex: this.state.reportIndex, __source: {
+									fileName: _jsxFileName,
+									lineNumber: 47
+								},
+								__self: this
+							}, '__self', this))
+						)
+					)
+				)
+			);
+		}
+	}]);
 
-  return App;
+	return App;
 }(_react2.default.Component);
 
 exports.default = App;
@@ -178,18 +210,27 @@ var ErrorReport = function (_React$Component) {
         value: function render() {
             return _react2.default.createElement(
                 "div",
-                _defineProperty({ className: "container", __source: {
+                _defineProperty({ className: "card border-danger mb-3", __source: {
                         fileName: _jsxFileName,
                         lineNumber: 12
                     },
                     __self: this
                 }, "__self", this),
                 _react2.default.createElement(
-                    "span",
-                    _defineProperty({
-                        __source: {
+                    "div",
+                    _defineProperty({ className: "card-header", __source: {
                             fileName: _jsxFileName,
                             lineNumber: 13
+                        },
+                        __self: this
+                    }, "__self", this),
+                    "Error"
+                ),
+                _react2.default.createElement(
+                    "div",
+                    _defineProperty({ className: "card-body", __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 16
                         },
                         __self: this
                     }, "__self", this),
@@ -368,6 +409,10 @@ var _ReportSummary = require('./ReportSummary');
 
 var _ReportSummary2 = _interopRequireDefault(_ReportSummary);
 
+var _reactToggleDisplay = require('react-toggle-display');
+
+var _reactToggleDisplay2 = _interopRequireDefault(_reactToggleDisplay);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -386,11 +431,20 @@ var ReportIndex = function (_React$Component) {
 
         var _this = _possibleConstructorReturn(this, (ReportIndex.__proto__ || Object.getPrototypeOf(ReportIndex)).call(this, props));
 
-        _this.state = { reportIndex: props.reportIndex };
+        _this.state = { reportIndex: props.reportIndex, showReports: false, prefix: "+" };
         return _this;
     }
 
     _createClass(ReportIndex, [{
+        key: 'toggleReportsShow',
+        value: function toggleReportsShow() {
+            if (this.state.showReports === false) {
+                this.setState({ showReports: true, prefix: "-" });
+            } else {
+                this.setState({ showReports: false, prefix: "+" });
+            }
+        }
+    }, {
         key: 'render',
         value: function render() {
             var _this2 = this;
@@ -398,9 +452,11 @@ var ReportIndex = function (_React$Component) {
             var reportIndex = this.state.reportIndex;
 
             var ReportSummaryView = reportIndex.map(function (report) {
-                return _react2.default.createElement(_ReportSummary2.default, _defineProperty({ key: report.filename, filename: report.filename, browser: report.browser, timestamp: report.timestamp, __source: {
+                /*  */
+                console.log(report);
+                return _react2.default.createElement(_ReportSummary2.default, _defineProperty({ key: report.filename, filename: report.filename, browser: report.browser, timestamp: report.timestamp, duration: report.duration, status: report.status, __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 14
+                        lineNumber: 25
                     },
                     __self: _this2
                 }, '__self', _this2));
@@ -408,18 +464,17 @@ var ReportIndex = function (_React$Component) {
 
             return _react2.default.createElement(
                 'div',
-                _defineProperty({ className: 'container', __source: {
+                _defineProperty({ className: 'card border-primary mb-3', __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 18
+                        lineNumber: 29
                     },
                     __self: this
                 }, '__self', this),
                 _react2.default.createElement(
                     'div',
-                    _defineProperty({
-                        __source: {
+                    _defineProperty({ className: 'card-header', onClick: this.toggleReportsShow.bind(this), __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 19
+                            lineNumber: 30
                         },
                         __self: this
                     }, '__self', this),
@@ -428,24 +483,34 @@ var ReportIndex = function (_React$Component) {
                         _defineProperty({
                             __source: {
                                 fileName: _jsxFileName,
-                                lineNumber: 20
+                                lineNumber: 31
                             },
                             __self: this
                         }, '__self', this),
-                        'Test Reports: ',
-                        this.state.reportIndex.length
+                        this.state.prefix,
+                        ' ',
+                        this.state.reportIndex.length,
+                        ' Test Reports'
                     )
                 ),
                 _react2.default.createElement(
-                    'div',
-                    _defineProperty({
-                        __source: {
+                    _reactToggleDisplay2.default,
+                    _defineProperty({ 'if': this.state.showReports === true, __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 22
+                            lineNumber: 33
                         },
                         __self: this
                     }, '__self', this),
-                    ReportSummaryView
+                    _react2.default.createElement(
+                        'div',
+                        _defineProperty({ className: 'card-body', __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 34
+                            },
+                            __self: this
+                        }, '__self', this),
+                        ReportSummaryView
+                    )
                 )
             );
         }
@@ -456,7 +521,7 @@ var ReportIndex = function (_React$Component) {
 
 exports.default = ReportIndex;
 
-},{"./ReportSummary":8,"react":46}],6:[function(require,module,exports){
+},{"./ReportSummary":8,"react":46,"react-toggle-display":43}],6:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -915,7 +980,7 @@ var ReportSummary = function (_React$Component) {
 
         var _this = _possibleConstructorReturn(this, (ReportSummary.__proto__ || Object.getPrototypeOf(ReportSummary)).call(this, props));
 
-        _this.state = { browser: props.browser, timestamp: props.timestamp, filename: props.filename, showReport: false, reportLoaded: false, reportData: [], error: true, errorMsg: "Not loaded.", duration: 0, result: 'passed' };
+        _this.state = { browser: props.browser, timestamp: props.timestamp, filename: props.filename, showReport: false, reportLoaded: false, reportData: [], error: true, errorMsg: "Not loaded.", duration: props.duration, status: props.status };
         return _this;
     }
 
@@ -951,10 +1016,24 @@ var ReportSummary = function (_React$Component) {
             }
         }
     }, {
+        key: 'getDuration',
+        value: function getDuration() {
+            var duration = this.state.duration / 1000000000;
+            if (isNaN(duration)) {
+                duration = 0;
+            }
+            return duration;
+        }
+    }, {
         key: 'render',
         value: function render() {
             var _this2 = this;
 
+            var styleClass = "card border-success mb-3";
+            if (this.state.status === "failed") {
+                styleClass = "card border-danger mb-3";
+            }
+            var duration = this.getDuration();
             var testTimeStamp = new Date();
             testTimeStamp.setTime(this.state.timestamp);
             var testDateString = testTimeStamp.getDate() + '/' + (testTimeStamp.getMonth() + 1) + '/' + testTimeStamp.getFullYear() + ' ' + testTimeStamp.getHours() + ':' + testTimeStamp.getMinutes();
@@ -963,24 +1042,24 @@ var ReportSummary = function (_React$Component) {
             var ReportFeatureView = reportData.map(function (report) {
                 return _react2.default.createElement(_ReportFeature2.default, _defineProperty({ key: report.id, reportData: report, __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 48
+                        lineNumber: 60
                     },
                     __self: _this2
                 }, '__self', _this2));
             });
             return _react2.default.createElement(
                 'div',
-                _defineProperty({ className: 'card border-primary mb-3', __source: {
+                _defineProperty({ className: styleClass, __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 51
+                        lineNumber: 63
                     },
                     __self: this
                 }, '__self', this),
                 _react2.default.createElement(
                     'div',
-                    _defineProperty({ className: 'card-header', onClick: this.toggleReportDisplay.bind(this), __source: {
+                    _defineProperty({ className: 'card-header cardTitleBar', onClick: this.toggleReportDisplay.bind(this), __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 52
+                            lineNumber: 64
                         },
                         __self: this
                     }, '__self', this),
@@ -988,13 +1067,13 @@ var ReportSummary = function (_React$Component) {
                         _reactToggleDisplay2.default,
                         _defineProperty({ 'if': this.state.browser === 'firefox', __source: {
                                 fileName: _jsxFileName,
-                                lineNumber: 53
+                                lineNumber: 65
                             },
                             __self: this
                         }, '__self', this),
-                        _react2.default.createElement('img', _defineProperty({ src: 'firefox.png', style: { "width": "64px", "height": "64px" }, __source: {
+                        _react2.default.createElement('img', _defineProperty({ src: 'firefox.png', className: 'cardImg', style: { "width": "64px", "height": "64px" }, __source: {
                                 fileName: _jsxFileName,
-                                lineNumber: 54
+                                lineNumber: 66
                             },
                             __self: this
                         }, '__self', this))
@@ -1003,29 +1082,38 @@ var ReportSummary = function (_React$Component) {
                         _reactToggleDisplay2.default,
                         _defineProperty({ 'if': this.state.browser !== 'firefox', __source: {
                                 fileName: _jsxFileName,
-                                lineNumber: 56
+                                lineNumber: 68
                             },
                             __self: this
                         }, '__self', this),
-                        _react2.default.createElement('img', _defineProperty({ src: 'chrome.png', style: { "width": "64px", "height": "64px" }, __source: {
+                        _react2.default.createElement('img', _defineProperty({ src: 'chrome.png', className: 'cardImg', style: { "width": "64px", "height": "64px" }, __source: {
                                 fileName: _jsxFileName,
-                                lineNumber: 57
+                                lineNumber: 69
                             },
                             __self: this
                         }, '__self', this))
                     ),
-                    testDateString,
-                    ' (',
-                    this.state.result,
-                    ', ',
-                    this.state.duration,
-                    's)'
+                    _react2.default.createElement(
+                        'div',
+                        _defineProperty({ className: 'cardTitleSmall', __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 71
+                            },
+                            __self: this
+                        }, '__self', this),
+                        testDateString,
+                        ' (',
+                        this.state.status,
+                        ', ',
+                        duration,
+                        's)'
+                    )
                 ),
                 _react2.default.createElement(
                     _reactToggleDisplay2.default,
                     _defineProperty({ 'if': this.state.showReport === true, __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 61
+                            lineNumber: 75
                         },
                         __self: this
                     }, '__self', this),
@@ -1033,7 +1121,7 @@ var ReportSummary = function (_React$Component) {
                         _reactToggleDisplay2.default,
                         _defineProperty({ 'if': this.state.reportLoaded === true, __source: {
                                 fileName: _jsxFileName,
-                                lineNumber: 62
+                                lineNumber: 76
                             },
                             __self: this
                         }, '__self', this),
@@ -1041,7 +1129,7 @@ var ReportSummary = function (_React$Component) {
                             _reactToggleDisplay2.default,
                             _defineProperty({ 'if': this.state.error === true, __source: {
                                     fileName: _jsxFileName,
-                                    lineNumber: 63
+                                    lineNumber: 77
                                 },
                                 __self: this
                             }, '__self', this),
@@ -1049,13 +1137,13 @@ var ReportSummary = function (_React$Component) {
                                 'div',
                                 _defineProperty({ className: 'card-body', __source: {
                                         fileName: _jsxFileName,
-                                        lineNumber: 64
+                                        lineNumber: 78
                                     },
                                     __self: this
                                 }, '__self', this),
                                 _react2.default.createElement(_ErrorReport2.default, _defineProperty({ error: this.state.errorMsg, __source: {
                                         fileName: _jsxFileName,
-                                        lineNumber: 65
+                                        lineNumber: 79
                                     },
                                     __self: this
                                 }, '__self', this))
@@ -1065,7 +1153,7 @@ var ReportSummary = function (_React$Component) {
                             _reactToggleDisplay2.default,
                             _defineProperty({ 'if': this.state.error === false, __source: {
                                     fileName: _jsxFileName,
-                                    lineNumber: 68
+                                    lineNumber: 82
                                 },
                                 __self: this
                             }, '__self', this),
@@ -1073,7 +1161,7 @@ var ReportSummary = function (_React$Component) {
                                 'div',
                                 _defineProperty({ className: 'card-body', __source: {
                                         fileName: _jsxFileName,
-                                        lineNumber: 69
+                                        lineNumber: 83
                                     },
                                     __self: this
                                 }, '__self', this),

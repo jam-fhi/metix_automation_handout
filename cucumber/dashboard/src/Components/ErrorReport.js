@@ -9,8 +9,13 @@ class ErrorReport extends React.Component {
 
     render() {
         return (
-            <div className="container">
-                	<span>{this.props.error}</span>
+            <div className="card border-danger mb-3">
+            	<div className="card-header">
+            		Error
+            	</div>
+            	<div className="card-body">
+            		{this.props.error}
+            	</div>
             </div>
         );
     }

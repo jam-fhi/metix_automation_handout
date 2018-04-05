@@ -33,14 +33,21 @@ class App extends React.Component {
 
     render() {
         return (
-            <div className="app">
-                <h1>Test Reports Dashboard</h1>
-                <ToggleDisplay if={this.state.indexLoaded === false}>
-                	<ErrorReport error={this.state.errorMsg} />
-                </ToggleDisplay>
-                <ToggleDisplay if={this.state.indexLoaded === true}>
-                	<ReportIndex reportIndex={this.state.reportIndex} />
-                </ToggleDisplay>                
+        	<div className="container">
+	            <div className="card border-primary mb-3 cardHolder" style={{"maxWidth":"60rem"}} >
+	            	<div className="card-header cardTitleBar">
+	            		<img src="favicon.ico" className="cardImg" style={{"width":"64px", "height":"64px"}} />
+		                <h1 className="cardTitle">Test Reports Dashboard</h1>
+		            </div>
+		            <div className="card-body">
+		                <ToggleDisplay if={this.state.indexLoaded === false}>
+		                	<ErrorReport error={this.state.errorMsg} />
+		                </ToggleDisplay>
+		                <ToggleDisplay if={this.state.indexLoaded === true}>
+		                	<ReportIndex reportIndex={this.state.reportIndex} />
+		                </ToggleDisplay>
+		            </div>
+	            </div>
             </div>
         );
     }

@@ -1,2 +1,23 @@
+.cardTitleBar {
+	display: table;
+}
 
+.cardImg {
+  	vertical-align: middle;
+  	display: table-cell;
+}
+.cardTitle {
+  vertical-align: middle;
+  display: table-cell;
+  font-size: 45px;
+}
+.cardTitleSmall {
+  vertical-align: middle;
+  display: table-cell;
+  font-size: 25px;
+}
+.cardHolder {
+	margin-top: 5rem;
+	margin-bottom: 5rem;
+}
 

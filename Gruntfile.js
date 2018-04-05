@@ -131,7 +131,11 @@ module.exports = function(grunt) {
     });    
 
     grunt.registerTask('deployTestReports', function(arg) {
-        grunt.task.run('indexTestReports', 'mkdir:publicLogs', 'clean:testLogs', 'copy:dashboardDuplicateLogs');
+        grunt.task.run('processTestReports', 'mkdir:publicLogs', 'clean:testLogs', 'copy:dashboardDuplicateLogs');
+    });    
+
+    grunt.registerTask('processTestReports', function(arg) {
+        grunt.task.run('generateTestReportStats', 'indexTestReports');
     });
 
     grunt.registerTask('buildDashboard', function(arg) {
@@ -144,6 +148,31 @@ module.exports = function(grunt) {
 
         dirList.map(function (t) {
             if(t !== "cucumber.json" && t !== "reportIndex.json") {
+
+                const reportFileStr = grunt.file.read('cucumber/logs/' + t);
+                let duration = 0;
+                let status = 'passed';
+                try {
+                    let reportJSON = JSON.parse(reportFileStr);
+                    if(reportJSON[0].stats) {
+                        reportJSON.forEach((feature) => {
+                            if(feature.stats.status !== 'passed') {
+                                status = 'failed';
+                            }
+                            duration += feature.stats.duration;
+                        });
+                    } else {
+                        grunt.log.write('Stats missing');
+                        status = 'failed';
+                        duration = 0;
+                    }
+
+                    } catch (e) {
+                        grunt.log.write(e);
+                        status = 'failed';
+                        duration = 0;
+                    }
+
                 let reportFile = '{"filename":"' + t + '",';
 
                 const browser = t.substring(t.indexOf('_') + 1, t.lastIndexOf('_'));
@@ -152,13 +181,65 @@ module.exports = function(grunt) {
 
                 const timeStamp = t.substring(t.lastIndexOf('_') + 1, t.indexOf('.'));
 
-                reportFile += '"timestamp":"' + timeStamp + '"}';
+                reportFile += '"timestamp":"' + timeStamp + '",';
+                reportFile += '"status":"' + status + '",';
+                reportFile += '"duration":"' + duration + '"}';
 
                 reportArray.push(reportFile);
             }
         });
         grunt.file.write('cucumber/logs/reportIndex.json', '{"reportIndex":[' + reportArray + ']}');
     });
+
+
+    grunt.registerTask('generateTestReportStats', function(arg) {
+        const dirList = grunt.file.expand({filter: "isFile", cwd: "cucumber/logs/"}, ["*.json"]);
+
+        dirList.map(function (t) {
+            if(t !== "cucumber.json" && t !== "reportIndex.json") {
+
+                const reportFile = grunt.file.read('cucumber/logs/' + t);
+                try {
+                    let reportJSON = JSON.parse(reportFile);
+
+                    if(!reportJSON[0].stats) {
+                        reportJSON.forEach((feature) => {
+                            let featureStatus = 'passed';
+                            let featureDuration = 0;
+                            feature.elements.forEach((scenario) => {
+                                let status = 'passed';
+                                let duration = 0;
+                                scenario.steps.forEach((step) => {
+                                    if(step.result.status !== 'passed') {
+                                        status = 'failed';
+                                    }
+                                    if('duration' in step.result) {
+                                        duration += step.result.duration;
+                                    }
+                                });
+                                scenario.stats = {};
+                                scenario.stats.duration = duration;
+                                scenario.stats.status = status;
+                                if(status !== 'passed') {
+                                    featureStatus = 'failed';
+                                }
+                                featureDuration += duration;
+                            });
+                          feature.stats = {};
+                          feature.stats.status = featureStatus;
+                          feature.stats.duration = featureDuration; 
+                        });
+
+                        grunt.file.write('cucumber/logs/' + t, JSON.stringify(reportJSON));
+                    }
+
+                } catch(e) {
+                    grunt.log.write(e);
+                }
+
+            }
+        });
+    });    
 
     grunt.loadNpmTasks('grunt-exec');
     grunt.loadNpmTasks('grunt-mkdir');
@@ -170,6 +251,5 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-browserify');
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-concat-css');
-    grunt.loadNpmTasks('grunt-folder-list');
 
 }
