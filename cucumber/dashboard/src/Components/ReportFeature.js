@@ -28,7 +28,7 @@ class ReportFeature extends React.Component {
             return <ReportScenario key={reactKey} scenarioData={elements} setResult={this.setResult.bind(this)} uri={this.state.reportData.uri} />;
         });    	
         return (
-            <div className={styleClass} style={{"maxWidth":"30rem"}}>
+            <div className={styleClass} >
                 <div className="card-header">
                 	<span>{this.state.reportData.keyword} {this.state.reportData.name} ({this.state.result}, {this.state.duration}s)</span>
                 </div>

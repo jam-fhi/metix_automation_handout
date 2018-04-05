@@ -53,7 +53,7 @@ class ReportScenario extends React.Component {
             return <ReportStep key={viewKey} stepData={step} uri={this.state.uri} setResult={this.setResult.bind(this)} />;
         });    	    	
         return (
-            <div className={styleClass} style={{"maxWidth":"30rem"}}>
+            <div className={styleClass} >
                 <div className="card-header">
                 	<span>{this.state.scenarioData.keyword} {this.state.scenarioData.name} ({this.state.result}, {this.state.duration}s)</span>
                 </div>

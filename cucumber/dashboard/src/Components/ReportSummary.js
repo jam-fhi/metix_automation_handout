@@ -9,7 +9,7 @@ class ReportSummary extends React.Component {
 
 	constructor(props) {
 		super(props);
-		this.state = {browser: props.browser, timestamp: props.timestamp, filename: props.filename, showReport: false, reportLoaded: false, reportData: [], error: true, errorMsg: "Not loaded."};
+		this.state = {browser: props.browser, timestamp: props.timestamp, filename: props.filename, showReport: false, reportLoaded: false, reportData: [], error: true, errorMsg: "Not loaded.", duration: 0, result: 'passed'};
 	}
 
 	toggleReportDisplay() {
@@ -42,28 +42,33 @@ class ReportSummary extends React.Component {
     render() {
     	const testTimeStamp = new Date;
     	testTimeStamp.setTime(this.state.timestamp);
-    	const testDateString = testTimeStamp.toDateString() + ' ' + testTimeStamp.toTimeString();
+    	const testDateString = testTimeStamp.getDate() + '/' + (testTimeStamp.getMonth() + 1) + '/' + testTimeStamp.getFullYear() + ' ' + testTimeStamp.getHours() + ':' + testTimeStamp.getMinutes();
         const { reportData } = this.state;
         const ReportFeatureView = reportData.map((report) => {
             return <ReportFeature key={report.id} reportData={report} />;
         });    	
         return (
-            <div className="container">
-            	<div onClick={this.toggleReportDisplay.bind(this)}>
-	                <div>
-	                	<span>Browser: {this.state.browser}</span>
-	                </div>
-	                <div>
-	                	<span>TimeStamp: {testDateString}</span>
-	                </div>
-                </div>           
+            <div className="card border-primary mb-3">
+            	<div className="card-header" onClick={this.toggleReportDisplay.bind(this)}>
+            		<ToggleDisplay if={this.state.browser === 'firefox'}>
+            			<img src="firefox.png" style={{"width":"64px","height":"64px"}} />
+            		</ToggleDisplay>
+            		<ToggleDisplay if={this.state.browser !== 'firefox'}>
+            			<img src="chrome.png" style={{"width":"64px","height":"64px"}} />
+            		</ToggleDisplay>            		
+	                {testDateString} ({this.state.result}, {this.state.duration}s)
+                </div>    
                 <ToggleDisplay if={this.state.showReport === true}>
                		<ToggleDisplay if={this.state.reportLoaded === true}>
                 		<ToggleDisplay if={this.state.error === true}>
-                			<ErrorReport error={this.state.errorMsg} />
+                			<div className="card-body">
+                				<ErrorReport error={this.state.errorMsg} />
+                			</div>
                 		</ToggleDisplay>
                 		<ToggleDisplay if={this.state.error === false}>
-                			{ReportFeatureView}
+                			<div className="card-body">	
+                				{ReportFeatureView}
+                			</div>
                 		</ToggleDisplay>                		
                 	</ToggleDisplay>     
                 </ToggleDisplay>

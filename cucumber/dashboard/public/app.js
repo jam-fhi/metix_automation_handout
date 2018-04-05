@@ -276,7 +276,7 @@ var ReportFeature = function (_React$Component) {
             });
             return _react2.default.createElement(
                 'div',
-                _defineProperty({ className: styleClass, style: { "maxWidth": "30rem" }, __source: {
+                _defineProperty({ className: styleClass, __source: {
                         fileName: _jsxFileName,
                         lineNumber: 31
                     },
@@ -555,7 +555,7 @@ var ReportScenario = function (_React$Component) {
             });
             return _react2.default.createElement(
                 'div',
-                _defineProperty({ className: styleClass, style: { "maxWidth": "30rem" }, __source: {
+                _defineProperty({ className: styleClass, __source: {
                         fileName: _jsxFileName,
                         lineNumber: 56
                     },
@@ -717,7 +717,7 @@ var ReportStep = function (_React$Component) {
 
             return _react2.default.createElement(
                 'div',
-                _defineProperty({ className: styleClass, style: { "maxWidth": "30rem" }, onClick: this.toggleResultDisplay.bind(this), __source: {
+                _defineProperty({ className: styleClass, onClick: this.toggleResultDisplay.bind(this), __source: {
                         fileName: _jsxFileName,
                         lineNumber: 53
                     },
@@ -915,7 +915,7 @@ var ReportSummary = function (_React$Component) {
 
         var _this = _possibleConstructorReturn(this, (ReportSummary.__proto__ || Object.getPrototypeOf(ReportSummary)).call(this, props));
 
-        _this.state = { browser: props.browser, timestamp: props.timestamp, filename: props.filename, showReport: false, reportLoaded: false, reportData: [], error: true, errorMsg: "Not loaded." };
+        _this.state = { browser: props.browser, timestamp: props.timestamp, filename: props.filename, showReport: false, reportLoaded: false, reportData: [], error: true, errorMsg: "Not loaded.", duration: 0, result: 'passed' };
         return _this;
     }
 
@@ -957,7 +957,7 @@ var ReportSummary = function (_React$Component) {
 
             var testTimeStamp = new Date();
             testTimeStamp.setTime(this.state.timestamp);
-            var testDateString = testTimeStamp.toDateString() + ' ' + testTimeStamp.toTimeString();
+            var testDateString = testTimeStamp.getDate() + '/' + (testTimeStamp.getMonth() + 1) + '/' + testTimeStamp.getFullYear() + ' ' + testTimeStamp.getHours() + ':' + testTimeStamp.getMinutes();
             var reportData = this.state.reportData;
 
             var ReportFeatureView = reportData.map(function (report) {
@@ -970,7 +970,7 @@ var ReportSummary = function (_React$Component) {
             });
             return _react2.default.createElement(
                 'div',
-                _defineProperty({ className: 'container', __source: {
+                _defineProperty({ className: 'card border-primary mb-3', __source: {
                         fileName: _jsxFileName,
                         lineNumber: 51
                     },
@@ -978,62 +978,54 @@ var ReportSummary = function (_React$Component) {
                 }, '__self', this),
                 _react2.default.createElement(
                     'div',
-                    _defineProperty({ onClick: this.toggleReportDisplay.bind(this), __source: {
+                    _defineProperty({ className: 'card-header', onClick: this.toggleReportDisplay.bind(this), __source: {
                             fileName: _jsxFileName,
                             lineNumber: 52
                         },
                         __self: this
                     }, '__self', this),
                     _react2.default.createElement(
-                        'div',
-                        _defineProperty({
-                            __source: {
+                        _reactToggleDisplay2.default,
+                        _defineProperty({ 'if': this.state.browser === 'firefox', __source: {
                                 fileName: _jsxFileName,
                                 lineNumber: 53
                             },
                             __self: this
                         }, '__self', this),
-                        _react2.default.createElement(
-                            'span',
-                            _defineProperty({
-                                __source: {
-                                    fileName: _jsxFileName,
-                                    lineNumber: 54
-                                },
-                                __self: this
-                            }, '__self', this),
-                            'Browser: ',
-                            this.state.browser
-                        )
+                        _react2.default.createElement('img', _defineProperty({ src: 'firefox.png', style: { "width": "64px", "height": "64px" }, __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 54
+                            },
+                            __self: this
+                        }, '__self', this))
                     ),
                     _react2.default.createElement(
-                        'div',
-                        _defineProperty({
-                            __source: {
+                        _reactToggleDisplay2.default,
+                        _defineProperty({ 'if': this.state.browser !== 'firefox', __source: {
                                 fileName: _jsxFileName,
                                 lineNumber: 56
                             },
                             __self: this
                         }, '__self', this),
-                        _react2.default.createElement(
-                            'span',
-                            _defineProperty({
-                                __source: {
-                                    fileName: _jsxFileName,
-                                    lineNumber: 57
-                                },
-                                __self: this
-                            }, '__self', this),
-                            'TimeStamp: ',
-                            testDateString
-                        )
-                    )
+                        _react2.default.createElement('img', _defineProperty({ src: 'chrome.png', style: { "width": "64px", "height": "64px" }, __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 57
+                            },
+                            __self: this
+                        }, '__self', this))
+                    ),
+                    testDateString,
+                    ' (',
+                    this.state.result,
+                    ', ',
+                    this.state.duration,
+                    's)'
                 ),
                 _react2.default.createElement(
                     _reactToggleDisplay2.default,
                     _defineProperty({ 'if': this.state.showReport === true, __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 60
+                            lineNumber: 61
                         },
                         __self: this
                     }, '__self', this),
@@ -1041,7 +1033,7 @@ var ReportSummary = function (_React$Component) {
                         _reactToggleDisplay2.default,
                         _defineProperty({ 'if': this.state.reportLoaded === true, __source: {
                                 fileName: _jsxFileName,
-                                lineNumber: 61
+                                lineNumber: 62
                             },
                             __self: this
                         }, '__self', this),
@@ -1049,26 +1041,44 @@ var ReportSummary = function (_React$Component) {
                             _reactToggleDisplay2.default,
                             _defineProperty({ 'if': this.state.error === true, __source: {
                                     fileName: _jsxFileName,
-                                    lineNumber: 62
-                                },
-                                __self: this
-                            }, '__self', this),
-                            _react2.default.createElement(_ErrorReport2.default, _defineProperty({ error: this.state.errorMsg, __source: {
-                                    fileName: _jsxFileName,
                                     lineNumber: 63
                                 },
                                 __self: this
-                            }, '__self', this))
+                            }, '__self', this),
+                            _react2.default.createElement(
+                                'div',
+                                _defineProperty({ className: 'card-body', __source: {
+                                        fileName: _jsxFileName,
+                                        lineNumber: 64
+                                    },
+                                    __self: this
+                                }, '__self', this),
+                                _react2.default.createElement(_ErrorReport2.default, _defineProperty({ error: this.state.errorMsg, __source: {
+                                        fileName: _jsxFileName,
+                                        lineNumber: 65
+                                    },
+                                    __self: this
+                                }, '__self', this))
+                            )
                         ),
                         _react2.default.createElement(
                             _reactToggleDisplay2.default,
                             _defineProperty({ 'if': this.state.error === false, __source: {
                                     fileName: _jsxFileName,
-                                    lineNumber: 65
+                                    lineNumber: 68
                                 },
                                 __self: this
                             }, '__self', this),
-                            ReportFeatureView
+                            _react2.default.createElement(
+                                'div',
+                                _defineProperty({ className: 'card-body', __source: {
+                                        fileName: _jsxFileName,
+                                        lineNumber: 69
+                                    },
+                                    __self: this
+                                }, '__self', this),
+                                ReportFeatureView
+                            )
                         )
                     )
                 )

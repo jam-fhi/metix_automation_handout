@@ -50,7 +50,7 @@ class ReportStep extends React.Component {
 		const source = this.state.uri + ' @ line ' + this.state.stepData.line;
 
         return (
-            <div className={styleClass} style={{"maxWidth": "30rem"}} onClick={this.toggleResultDisplay.bind(this)} >
+            <div className={styleClass} onClick={this.toggleResultDisplay.bind(this)} >
                 <div className="card-header">
                 	<span>{this.state.prefix} {this.state.stepData.keyword} {this.state.stepData.name} ({this.state.result}, {this.state.duration}s)</span>
                 </div>

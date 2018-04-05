@@ -152,9 +152,7 @@ module.exports = function(grunt) {
 
                 const timeStamp = t.substring(t.lastIndexOf('_') + 1, t.indexOf('.'));
 
-                reportFile += '"timestamp":"' + timeStamp + '",';
-
-                reportFile += '"loaded":false}';
+                reportFile += '"timestamp":"' + timeStamp + '"}';
 
                 reportArray.push(reportFile);
             }
