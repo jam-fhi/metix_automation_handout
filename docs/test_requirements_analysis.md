@@ -97,7 +97,7 @@ Based on the available documentation, the following test requirements have been 
 
 1. All forms should be validated.
 2. All forms should have clearly identified labels.
-	2a. placeholders can be used.
+	* placeholders can be used.
 3. Provided gifs should be used.
 4. All pages should be consistent
 5. All JSON file content should be displayed.
@@ -105,8 +105,8 @@ Based on the available documentation, the following test requirements have been 
 ### Framework Concerns
 
 1. Early stage development
-	1a. The framework should be flexable
-	1b. The framework should be fast (assuming lots of commits for continuous deployment in an early stage)
+	* The framework should be flexable
+	* The framework should be fast (assuming lots of commits for continuous deployment in an early stage)
 2. Reporting dashboard
 3. Consistent design pattern
-	3a. Allow the framework to operate independent of tests, so framework can be reused in scenarios without reworking the underlying library.
+	* Allow the framework to operate independent of tests, so framework can be reused in scenarios without reworking the underlying library.
