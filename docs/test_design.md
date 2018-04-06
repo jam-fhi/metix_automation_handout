@@ -7,6 +7,9 @@ Based on the test requirements analysis, the following designs have been impleme
 1. All forms should be validated.
 2. All forms should have clearly identified labels.
 	* placeholders can be used.
+
+This was a reasonably straight forward process. I used xpath to look up input, select, textarea elements and corresponding labels based on the for attribute matching id or name attributes.
+
 3. Provided gifs should be used.
 
 A similar approach to checking the json content has been taken here. This time the grunt task does a dir list on the resources directory to get a list of gif files to look for.
@@ -30,6 +33,7 @@ All I can do here is try to document the inconsistencies and go over them with t
 1. Info Station navigation link is Information Station on the info.html page.
 2. Info Station has a title of "Automation Information Station" breaking convetion with Home and Contact which are titled as the navigation links. 
 3. Info Section has no header image, but it has 3 other images which makes up for the big one missing at the top. Perhaps this is on purpose?
+4. Form elements either use a name or an id attribute. It's inconsistent to switch between the 2.
 
 5. All JSON file content should be displayed.
 

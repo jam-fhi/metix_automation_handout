@@ -115,9 +115,12 @@ class CustomWorld {
 		});
     }
 
-    findInputField(fieldId) {
+    findInputField(tag, fieldId) {
     	const By = webdriver.By;
-    	const xpath = '//input[@id="' + fieldId + '"]';
+    	let xpath = '//' + tag + '[@id="' + fieldId + '"]';
+    	if(tag !== 'input') {
+    		xpath = '//' + tag + '[@name="' + fieldId + '"]';
+    	}
 		return this.driver.findElement(By.xpath(xpath)).then((el) => {
 			if(typeof(el) === "object") {
 				return true;

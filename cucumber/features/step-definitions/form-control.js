@@ -13,9 +13,9 @@ Given('navigate to the {string} page', function (string) {
 	})
 });
 
-Then('the {string} field will have an identified label', function (string) {
-	return this.findInputField(string).then((fieldResult) => {
-		return this.findInputLabel(string).then((labelResult) => {
+Then('the {string} field with id {string} will have an identified label', function (string, string2) {
+	return this.findInputField(string, string2).then((fieldResult) => {
+		return this.findInputLabel(string2).then((labelResult) => {
 			return expect(fieldResult).to.equal(labelResult);
 		}).catch((e) => {
 			throw e;
