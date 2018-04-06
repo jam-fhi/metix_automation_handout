@@ -2,6 +2,7 @@ const { Given, When, Then } = require('cucumber');
 const { expect } = require('chai');
 
 Given('I go to {string}', function (string) {
+	this.setServerURL(string);
     return this.visitPage(string).then((pageLoaded) => {
         return expect(pageLoaded).to.equal(true);
     }).catch((e) => {

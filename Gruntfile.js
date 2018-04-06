@@ -127,7 +127,7 @@ module.exports = function(grunt) {
     });    
 
     grunt.registerTask('beforeTest', function(arg) {
-        grunt.task.run('mkdir:logging', 'generateJSONContentFeature');
+        grunt.task.run('mkdir:logging', 'generateJSONContentFeature', 'generateGifUsedFeature');
     });
 
     grunt.registerTask('afterTest', function(arg) {
@@ -193,10 +193,11 @@ module.exports = function(grunt) {
                 reportFile += '"status":"' + status + '",';
                 reportFile += '"duration":"' + duration + '"}';
 
-                reportArray.push(reportFile);
+                reportArray.push(JSON.parse(reportFile));
             }
         });
-        grunt.file.write('cucumber/logs/reportIndex.json', '{"reportIndex":[' + reportArray + ']}');
+        reportArray = reportArray.sort(function(a, b) { return b.timestamp - a.timestamp });
+        grunt.file.write('cucumber/logs/reportIndex.json', '{"reportIndex":' + JSON.stringify(reportArray) + '}');
     });
 
 
@@ -249,6 +250,28 @@ module.exports = function(grunt) {
         });
     });    
 
+    grunt.registerTask('generateGifUsedFeature', function(arg) {
+        const dirList = grunt.file.expand({filter: "isFile", cwd: "public/resources"}, ["*.gif"]);
+
+    	let featurePlan = 'Feature: Gif Files provided are used.\n\n';
+
+    	featurePlan += 'Scenario: All images should be working\n';
+    	featurePlan += 'Given I go to "http://localhost:3000"\n';
+    	featurePlan += 'Then I expect to find all images loading\n\n';
+
+    	featurePlan += 'Scenario Outline: Find gif on the site\n';
+    	featurePlan += 'Given I go to "http://localhost:3000"\n';
+    	featurePlan += 'Then we will find "<gif>" image on one or more of the pages\n'
+    	featurePlan += 'Examples:\n';
+    	featurePlan += '|gif|\n';
+
+        dirList.map(function (t) {
+    		featurePlan += '|' + t + '|\n';
+  		});
+
+        grunt.file.write('cucumber/features/GifUsed.feature', featurePlan);
+    });   
+
     grunt.registerTask('generateJSONContentFeature', function(arg) {
         const dummyFile = grunt.file.read('public/dummy-data.json');
         try {
@@ -267,11 +290,6 @@ module.exports = function(grunt) {
     				featurePlan += '|' + paraValue + '|\n';
     				}
   			}
-            /*dummyJSON.forEach((panel) => {
-	            panel.forEach((paragraph) => {
-                    featurePlan += '|' + paragraph + '|\n'; 
-                 });
-	        });*/
 
             grunt.file.write('cucumber/features/JSON-content.feature', featurePlan);
 

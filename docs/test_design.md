@@ -8,6 +8,19 @@ Based on the test requirements analysis, the following designs have been impleme
 2. All forms should have clearly identified labels.
 	* placeholders can be used.
 3. Provided gifs should be used.
+
+A similar approach to checking the json content has been taken here. This time the grunt task does a dir list on the resources directory to get a list of gif files to look for.
+
+There is a problem with this approach in that there is 1 image on the site that is not loading. Without specifications or being able to ask the marketing or dev teams what should happen here, its not possible to design an automation test specifically for this. The 2 options are either there is a typo in the file name and "-error" should not be there, or the marketing team has forgetten to provide one of their images.
+
+The best that can be done here is to implement a automation test to check for broken images.
+
+As a result there are 2 test cases running to verify that provided images are used. It's a belt and braces approach.
+
+Putting this one on hold just now. I'm having a lot of trouble with webdriver findElements not returing an array of img tags, so I can only seem to check the first image on the page. 
+
+https://stackoverflow.com/questions/35098156/get-an-array-of-elements-from-findelementby-classname
+
 4. All pages should be consistent
 5. All JSON file content should be displayed.
 

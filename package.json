@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/jamiefhill/metix_automation_handout#readme",
   "dependencies": {
+    "axios": "^0.18.0",
     "babel-preset-react-app": "^3.1.1",
     "express": "^4.16.3",
     "flux": "^3.1.3",
