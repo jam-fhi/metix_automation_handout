@@ -87,36 +87,6 @@ class CustomWorld {
 		});
     }
 
-/*
-    imageExists(imgSrc) {
-	    return new Promise((resolve, reject) => {
-    	    let xhr = new XMLHttpRequest();
-        	xhr.open("HEAD", imgSrc);
-
-        	xhr.onload = () => {
-                resolve(false);
-        	};
-        	xhr.onerror = () => reject(true);
-        	xhr.send();
-    	});
-	}
-*/
-/*
-	imageExists(imageSrc){
-		const http = new XMLHttpRequest();
-
-    	http.open('HEAD', this.getImageURL(imageSrc), false);
-    	http.send();
-
-    	return http.status != 404;
-	}
-*/
-/*
-	getImageURL(src) {
-		const imgSrc = src.substring(1, src.length);
-		return this.serverURL + imgSrc;
-	}
-*/
     findDeadImages() {
     	const By = webdriver.By;
     	const promise = require('selenium-webdriver').promise;
@@ -131,25 +101,6 @@ class CustomWorld {
         		return allSrc;
     		});
 		});
-
-/*
-
-    	.then((el) => {
-    		return el.map((elem) => {
-    			elem.getAttribute('src').then((src) => {
-    				return axios.get(src).then((response) => {
-    					console.log('image exists', src);
-    					return '';
-    				}).catch((e) => { 
-    					// Returning a value here, as this is what
-    					// we need to know an image is broken.
-    					console.log('Error', e.config.url, 'End Error'); 
-    					return e.config.url;
-    					//throw e.cnfig.url; 
-    				});
-    			}).catch((e) => { throw e; });
-    		}).catch((e) => { throw e; });
-    	}).catch((e) => { throw e; });*/
     }
 
     getPageTitle() {
