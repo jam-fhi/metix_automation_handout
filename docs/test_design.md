@@ -30,10 +30,10 @@ This is an awkward one to automate. I've nothing to say what it should be, so re
 
 All I can do here is try to document the inconsistencies and go over them with the Product Owner at a later date.
 
-1. Info Station navigation link is Information Station on the info.html page.
-2. Info Station has a title of "Automation Information Station" breaking convetion with Home and Contact which are titled as the navigation links. 
-3. Info Section has no header image, but it has 3 other images which makes up for the big one missing at the top. Perhaps this is on purpose?
-4. Form elements either use a name or an id attribute. It's inconsistent to switch between the 2.
+	1. Info Station navigation link is Information Station on the info.html page.
+	2. Info Station has a title of "Automation Information Station" breaking convetion with Home and Contact which are titled as the navigation links. 
+	3. Info Section has no header image, but it has 3 other images which makes up for the big one missing at the top. Perhaps this is on purpose?
+	4. Form elements either use a name or an id attribute. It's inconsistent to switch between the 2.
 
 5. All JSON file content should be displayed.
 
@@ -47,7 +47,24 @@ A point for future consideration here is to make the navigation of the site auto
 
 1. Early stage development
 	* The framework should be flexable
+
+		Designing the framework to be flexible, with such a small scale website is hard to quantify. I think the best effort has been made to separate web driver operations from scenario steps to allow reuse of key operations and allow the framework to scale with more and more test cases. However, the proof is in the pudding as they say and this technical challenge doesn't need to scale much more than what it is just now.
+
 	* The framework should be fast (assuming lots of commits for continuous deployment in an early stage)
+
+		The framework is so far running at about 1 minute per run, with form validation still to be added this will increase. I'd expect the whole test suite to execute in under 2 minutes, which isn't too bad, but I expect it can be optimised to operate faster.
+
+		The first thing to try would be headless running, e.g. https://stackoverflow.com/questions/44197253/headless-automation-with-nodejs-selenium-webdriver?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
+
+		Second, reuse the same browser window http://tarunlalwani.com/post/reusing-existing-browser-session-selenium/
+
+		Thirdly, I'd expect that running in docker on as a test service would give a bit of optimisation as well. There wouldn't be all the background processes going on as with my laptop.
+
 2. Reporting dashboard
+
+Development log for Reporting dashboard is in framework_design_considerations.
+
 3. Consistent design pattern
 	* Allow the framework to operate independent of tests, so framework can be reused in scenarios without reworking the underlying library.
+
+	This is discussed under the flexability statement above.
