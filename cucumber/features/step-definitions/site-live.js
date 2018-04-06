@@ -6,7 +6,7 @@ Given('I go to {string}', function (string) {
         return expect(pageLoaded).to.equal(true);
     }).catch((e) => {
         throw e;
-    })
+    });
 });
 
  Then('the index.html page will be displayed, with title {string}', function (string) {

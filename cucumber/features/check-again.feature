@@ -10,5 +10,5 @@ Then the index.html page will be displayed, with title "<title>"
 
 Examples:
 |url|title|
-|http://localhost:3000|Home|
-|http://localhost:3000|Home|
+|http://localhost:3000|Home1|
+|http://localhost:3000|Home2|

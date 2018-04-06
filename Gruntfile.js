@@ -119,11 +119,15 @@ module.exports = function(grunt) {
     });
 
     grunt.registerTask('testChrome', function(arg) {
-        grunt.task.run('mkdir:logging', 'env:chrome', 'exec:chrome', 'afterTest');
+        grunt.task.run('beforeTest', 'env:chrome', 'exec:chrome', 'afterTest');
     });
 
     grunt.registerTask('testFireFox', function(arg) {
-        grunt.task.run('mkdir:logging', 'env:firefox', 'exec:firefox', 'afterTest');
+        grunt.task.run('beforeTest', 'env:firefox', 'exec:firefox', 'afterTest');
+    });    
+
+    grunt.registerTask('beforeTest', function(arg) {
+        grunt.task.run('mkdir:logging', 'generateJSONContentFeature');
     });
 
     grunt.registerTask('afterTest', function(arg) {
@@ -243,6 +247,37 @@ module.exports = function(grunt) {
 
             }
         });
+    });    
+
+    grunt.registerTask('generateJSONContentFeature', function(arg) {
+        const dummyFile = grunt.file.read('public/dummy-data.json');
+        try {
+        	let dummyJSON = JSON.parse(dummyFile);
+        	let featurePlan = 'Feature: dummy-data json content must be on the site\n\n';
+        	featurePlan += 'Scenario Outline: Find content on site\n';
+        	featurePlan += 'Given I go to "http://localhost:3000"\n';
+        	featurePlan += 'Then we will find "<content>" on one or more of the pages\n'
+        	featurePlan += 'Examples:\n';
+        	featurePlan += '|content|\n';
+
+  			for (let key in dummyJSON) {
+    			let value = dummyJSON[key];
+    			for(let paraKey in value) {
+    				let paraValue = value[paraKey];
+    				featurePlan += '|' + paraValue + '|\n';
+    				}
+  			}
+            /*dummyJSON.forEach((panel) => {
+	            panel.forEach((paragraph) => {
+                    featurePlan += '|' + paragraph + '|\n'; 
+                 });
+	        });*/
+
+            grunt.file.write('cucumber/features/JSON-content.feature', featurePlan);
+
+        } catch(e) {
+            grunt.log.write(e);
+        }
     });    
 
     grunt.loadNpmTasks('grunt-exec');

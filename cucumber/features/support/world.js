@@ -40,6 +40,23 @@ class CustomWorld {
         });
     }
 
+    menuNavigate(linkName) {
+    	const By = webdriver.By;
+    	let xpath = '//body/div/a[text()="' + linkName + '"]';
+    	return this.driver.findElement(By.xpath(xpath)).click();
+    }
+
+    findTextOnBody(test) {
+    	const By = webdriver.By;
+		return this.driver.findElement(By.tagName("body")).getText().then((text) => {
+			if(text.indexOf(test) >= 0) {
+				return true;
+			} else {
+				return false;
+			}
+		});
+    }
+
     getPageTitle() {
         return this.driver.getTitle();
     }
