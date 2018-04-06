@@ -22,6 +22,15 @@ Putting this one on hold just now. I'm having a lot of trouble with webdriver fi
 https://stackoverflow.com/questions/35098156/get-an-array-of-elements-from-findelementby-classname
 
 4. All pages should be consistent
+
+This is an awkward one to automate. I've nothing to say what it should be, so really this is just my opinion. For example the navigation link to Info Station is "Info Station" on the Home and Contact page, but it is "Information Station" on the Info Station page. Personally I'd go for "Info Station", 2 out of 3 pages use that and majority rules. That being said, this could be a snapshot of the site in development and a management decision has been made to go with Information but only 1 page is updated so far? Which seems unlikely with modern build processes, but such is the example site thats been provided. This is where automating this becomes awkward - what is the correct choice?
+
+All I can do here is try to document the inconsistencies and go over them with the Product Owner at a later date.
+
+1. Info Station navigation link is Information Station on the info.html page.
+2. Info Station has a title of "Automation Information Station" breaking convetion with Home and Contact which are titled as the navigation links. 
+3. Info Section has no header image, but it has 3 other images which makes up for the big one missing at the top. Perhaps this is on purpose?
+
 5. All JSON file content should be displayed.
 
 A grunt task has been implemented to read the dummy-data.json file and process the expected content into a gherkin feature file that runs a scenario outline. This allows for the site content to change, such as typo's being corrected without the automation test requiring an update.

@@ -87,6 +87,48 @@ class CustomWorld {
 		});
     }
 
+    getLabelText(labelId) {
+    	const By = webdriver.By;
+    	const xpath = '//label[@for="' + labelId + '"]';
+		return this.driver.findElement(By.xpath(xpath)).then((el) => {
+			if(typeof(el) === "object") {
+				return el.getText();
+			} else {
+				return '';
+			}
+		}).catch((e) => {
+			throw e;
+		});
+    }
+
+    findInputLabel(labelId) {
+    	const By = webdriver.By;
+    	const xpath = '//label[@for="' + labelId + '"]';
+		return this.driver.findElement(By.xpath(xpath)).then((el) => {
+			if(typeof(el) === "object") {
+				return true;
+			} else {
+				return false;
+			}
+		}).catch((e) => {
+			throw e;
+		});
+    }
+
+    findInputField(fieldId) {
+    	const By = webdriver.By;
+    	const xpath = '//input[@id="' + fieldId + '"]';
+		return this.driver.findElement(By.xpath(xpath)).then((el) => {
+			if(typeof(el) === "object") {
+				return true;
+			} else {
+				return false;
+			}
+		}).catch((e) => {
+			throw e;
+		});
+    }
+
     findDeadImages() {
     	const By = webdriver.By;
     	const promise = require('selenium-webdriver').promise;
