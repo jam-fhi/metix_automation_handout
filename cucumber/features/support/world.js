@@ -1,25 +1,31 @@
 require('chromedriver');
 require('geckodriver');
+require('selenium-webdriver').promise;
 const { setWorldConstructor } = require('cucumber');
 const webdriver = require('selenium-webdriver');
 const axios = require('axios');
+const chrome = require('selenium-webdriver/chrome');
+const firefox = require('selenium-webdriver/firefox');
+const screen = {width: 640, height: 480};
 
 class CustomWorld {
 
     constructor(options) {
-        this.defaultTimeout = 5000;
+        this.defaultTimeout = 10000;
         this.variable = 0;
 
         if(options.parameters.client === 'firefox') {
             this.driver = new webdriver.Builder()
                 .forBrowser('firefox')
+                .setFirefoxOptions(new firefox.Options().headless().windowSize(screen))
                 .build();
         } else {
             // Run chrome by default, regardless of what options are passed in.
             this.driver = new webdriver.Builder()
                 .forBrowser('chrome')
+                .setChromeOptions(new chrome.Options().headless().windowSize(screen))
                 .build();
-        }
+        }     
     }
 
     setServerURL(url) {
@@ -149,33 +155,38 @@ class CustomWorld {
 
     findDeadImages() {
     	const By = webdriver.By;
-    	const promise = require('selenium-webdriver').promise;
-    	let pendingElements = this.driver.findElement(By.xpath('//img'));
-
-    	/*
-
-    	Lost in a previous commit, where I removed commented out sections.
-
-    	axios.get(imgSrc).then((response) => {
-			return true;
-    	}).catch((e) => {
-	 		return false;
-    	});
-
-		This section needs more work. Having a problem reading an array of all
-		img tags on the page.
-
-    	*/
-
-    	return pendingElements.then(function (elements) {
-    		let pendingImg = elements.map(function (elem) {
-        		return elem.getAttribute('src');
+    	return this.driver.findElements(By.xpath('//img')).then(function(elem) {
+			let pending = elem.map(function (elem) {
+				return elem.getAttribute('src').then((src) => {
+    				return axios.get(src).then((response) => {
+						// Image loads, nothing to return here.
+						return '';
+    				}).catch((e) => {
+    					// 404 error handled in catch.
+	 					return src;
+    				});
+					}).catch((e) => {
+						throw e;
+					});
     			});
-    		return promise.all(pendingImg).then(function (allSrc) {
-    			console.log(allSrc);
-        		return allSrc;
-    		});
-		});
+			return Promise.all(pending).then(function (allSrc) {
+				let deadImg = '';
+				allSrc.forEach((src) => {
+					if(src !== '') {
+						if(deadImg !== '') {
+							deadImg += ', ';
+						}
+						deadImg += src;
+					}
+				})
+    			console.log('Dead Images', deadImg);
+        		return deadImg;
+    		}).catch((e) => {
+    			throw e;
+    		})
+    	}).catch((e) => {
+    		throw e;
+    	});
     }
 
     setInputText(tag, fieldId, text) {

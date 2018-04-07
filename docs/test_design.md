@@ -88,7 +88,9 @@ Based on the test requirements analysis, the following designs have been impleme
 
 	As a result there are 2 test cases running to verify that provided images are used. It's a belt and braces approach.
 
-	Putting this one on hold just now. I'm having a lot of trouble with webdriver findElements not returing an array of img tags, so I can only seem to check the first image on the page. 
+	I previously had to put this on hold, as it wouldn't work. It turns out findElement is not the same as findElements.
+
+	Once the typo was corrected, I am able to extract all img src attributes and then use axios to do a get request to the server to verify if the image exists or not and then report what images are dead back up the chain.
 
 	https://stackoverflow.com/questions/35098156/get-an-array-of-elements-from-findelementby-classname
 

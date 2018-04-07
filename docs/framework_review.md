@@ -2,21 +2,9 @@
 
 ## Unfinished items
 
-Out of the requirements identified, there are 2 parts I've not been able to do.
+Out of the requirements identified, there are 1 parts I've not been able to do.
 
-1. Dead images
-
-I've had problems with selenium webdriver findElements only returning the first element it finds, rather than an array of all elements. This is preventing my test framework from identifying the broken image on the info store page.
-
-This is a case of research until the solution is found.
-
-I think in a real world case, the marketing team or development team would confirm the expected images, rendering the dead image check obsolete. 
-
-I've not had that option during the process of building this framework, and checking the entire site for dead images is an interesting test case to persue.
-
-https://stackoverflow.com/questions/35098156/get-an-array-of-elements-from-findelementby-classname
-
-2. Validation error message
+1. Validation error message
 
 I can not read the validation error message on the page. It displays fine in the browser, so it should exist in the DOM.
 
@@ -64,7 +52,7 @@ Aspects not covered:
 
 The main thing I would change in the future would be to place the server url in a module exports js file and change the first step to "Given I go to our site", as currently if the port number was to change then serveral files need to be updated.
 
-The second thing would be to take more time at the beginning to setup headless execution and reuse of one browser window, simply to improve performance.
+The second thing would be to reuse of one browser window, simply to improve performance.
 
 Out side of performance improvements, I think the design is working well. The webdriver wrapper methods have been reused in a number of different scnarios and all test results (even the tests that are not fully working yet) are logged and displayed on the requested dashboard.
 

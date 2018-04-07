@@ -59,3 +59,7 @@ From another test result, using this calculation then
 
 This makes sense in terms of my own experience running tests, and seems to be a sensible number of seconds for test duration. I
 'll double check this at the end. There should be a documentation reference to explain.
+
+#### Dashboard Bugs
+
+1. If you try to highlight and select text on a step report, it will collapse. Need to change the toggle display to only the card header.
