@@ -31,43 +31,11 @@ Then('the label {string} will read {string}', function (string, string2) {
 	}).catch((e) => { throw e; });
 });
 
-Then('when {string} and the form is submitted the result will be {string}', function (string, string2) {
-	return this.setInputText('input', 'email', string).then((el) => {
-		return this.submitButton('home-submit').then((elem) => {
-			return this.findTextOnBody(string2, true).then((result) => {
-				// Not a great way to do this. Currently, I've been unable to
-				// find an id for the validation error message and looking
-				// for the text on the body never returns anything.
-				// I'll come back to this at the end.
-				return expect(result).to.equal(true);
-			}). catch((e) => {
-				throw e;
-			});
-		}).catch((e) => { 
-			throw e;
-		});
-	}).catch((e) => {
-		throw e;
-	});
-});
-
-Then('when {string} and {string} are entered, on submit the result will be {string}', function (string, string2, string3) {
-	return this.setInputText('input', 'email', string).then((el) => {
-		return this.setInputText('input', 'pwd', string2).then((el) => {
-			return this.submitButton('home-submit').then((elem) => {
-				return this.findTextOnBody(string3, true).then((result) => {
-					// Not a great way to do this. Currently, I've been unable to
-					// find an id for the validation error message and looking
-					// for the text on the body never returns anything.
-					// I'll come back to this at the end.
-					return expect(result).to.equal(true);
-				}). catch((e) => {
-					throw e;
-				});
-			}).catch((e) => { 
-				throw e;
-			});
-		}).catch((e) => {
+Then('when {string} with id {string} is populated with {string} then the result will be {string}', function (elemType, fieldId, value, message) {
+	return this.setInputText(elemType, fieldId, value).then((el) => {
+		return this.checkInputErrorMessage(elemType, fieldId, message).then((result) => {
+			return expect(result).to.equal(true);
+		}). catch((e) => {
 			throw e;
 		});
 	}).catch((e) => {

@@ -18,27 +18,19 @@ Examples:
 | Contact | requestType       | Request Type:  | select   |
 | Contact | message           | Message:       | textarea |
 
-Scenario Outline: index.html login form should validate email inputs
+Scenario Outline: form should validate inputs
 Given I go to "http://localhost:3000"
-And navigate to the "Home" page
-Then when "<email>" and the form is submitted the result will be "<message>"
+And navigate to the "<page>" page
+Then when "<type>" with id "<fieldId>" is populated with "<value>" then the result will be "<message>"
 
 Examples:
-| email                     | message                                   |
-|                           | Please fill in this field.                |
-| !def!xyz%abc@example.com  |                                           |
-| john smith @ example..com | A part followed by '@' should not contain |
-| jamie                     | Please include an '@'                     |
-| @jamie...uk               | Please enter a part followed by '@'       |
-
-Scenario Outline: index.html login form should validate password inputs
-Given I go to "http://localhost:3000"
-And navigate to the "Home" page
-Then when "!def!xyz%abc@example.com" and "<password>" are entered, on submit the result will be "<message>"
-
-Examples:
-| password | message                    |
-|          | Please fill in this field. |
-| a        |                            |
-| 1        |                            |
-| $        |                            |
+| page | type  | fieldId | value                     | message                                   |
+| Home | input | email   |                           | Please fill in this field                 |
+| Home | input | email   | !def!xyz%abc@example.com  |                                           |
+| Home | input | email   | john smith @ example..com | A part followed by '@' should not contain |
+| Home | input | email   | jamie                     | Please include an '@'                     |
+| Home | input | email   | @jamie...uk               | Please enter a part followed by '@'       |
+| Home | input | pwd     | a                         |                                           |
+| Home | input | pwd     | 1                         |                                           |
+| Home | input | pwd     | $                         |                                           |
+| Home | input | pwd     |                           | Please fill in this field                 |

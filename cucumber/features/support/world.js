@@ -52,7 +52,7 @@ class CustomWorld {
     	return this.driver.findElement(By.xpath(xpath)).click();
     }
 
-    findTextOnBody(test, handleError) {
+    findTextOnBody(test) {
     	const By = webdriver.By;
 		return this.driver.findElement(By.tagName("body")).getText().then((text) => {
 			if(text.indexOf(test) >= 0) {
@@ -61,14 +61,11 @@ class CustomWorld {
 				return false;
 			}
 		}).catch((e) => {
-			if(handleError === false) {
-				// Return false here, instead of throwing an error
-				// This lets the calling method continue to the 
-				// next page.			
-				return false;
-			} else {
-				throw e;
-			}
+			// Return false here, instead of throwing an error
+			// This lets the calling method continue to the 
+			// next page.			
+			return false;
+			//throw e;
 		});
     }
 
@@ -161,6 +158,24 @@ class CustomWorld {
     	let xpath = this.getInputXpath(tag, fieldId);
     	return this.driver.findElement(By.xpath(xpath)).then((el) => {
     		return el.sendKeys(text);
+    	}).catch((e) => {
+    		throw e;
+    	});
+    }
+
+    checkInputErrorMessage(tag, fieldId, error) {
+    	const By = webdriver.By;
+    	let xpath = this.getInputXpath(tag, fieldId);
+    	return this.driver.findElement(By.xpath(xpath)).then((el) => {
+    		return el.getAttribute('alt').then((alt) => {
+    			if(alt.indexOf(error) >= 0) {
+    				return true;
+    			} else {
+    				return false;
+    			}
+    		}).catch((e) => {
+    			throw e;
+    		});
     	}).catch((e) => {
     		throw e;
     	});
