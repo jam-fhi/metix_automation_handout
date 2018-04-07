@@ -17,13 +17,22 @@ Based on the test requirements analysis, the following designs have been impleme
 			This is a good article covering validation for email addresses:
 			https://haacked.com/archive/2007/08/21/i-knew-how-to-validate-an-email-address-until-i.aspx/
 
+			Message presented here:
+				"Please fill in this field."
+				"Please include an '@' in the email address. 'jamie' is missing an '@'"
+				"Please enter a part following '@' 'jamie@' is incomplete"
+				"'.' is used at a wrong position in '.com'"
+				"A part following '@' should not contain the symbol ' '"
+				"A part followed by '@' should not contain the symbol '"'"
+
 		Password
 
 			This is where assumption comes in. The index page has popups that give hints on what is valid, however for the password it only says you need to fill this in. It presently accepts any password >= 1. It does not appear to be a maximum length for the password either.
 
 			As this is a login and not registration form, this makes sense - how would you validate an existing password without giving it away?
 
-		The strategy here is to identify several invalid email addresses and check for the validation popup. Then using a valid email address, check for the password blank error popup.
+			With only 1 error message being displayed, there is only 1 test here and thats for blank input.
+			The only message presented here is "Please fill in this field."
 
 	Contact form:
 
@@ -95,6 +104,7 @@ Based on the test requirements analysis, the following designs have been impleme
 		4. Form elements either use a name or an id attribute. It's inconsistent to switch between the 2.
 		5. Site is not responsive or work on mobile displays.
 		6. home and contact pages both have home-submit as button id.
+		7. Contact page image has a different background colour to the rest of the site
 
 5. All JSON file content should be displayed.
 
