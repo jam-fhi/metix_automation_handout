@@ -52,7 +52,7 @@ class CustomWorld {
     	return this.driver.findElement(By.xpath(xpath)).click();
     }
 
-    findTextOnBody(test) {
+    findTextOnBody(test, handleError) {
     	const By = webdriver.By;
 		return this.driver.findElement(By.tagName("body")).getText().then((text) => {
 			if(text.indexOf(test) >= 0) {
@@ -61,11 +61,14 @@ class CustomWorld {
 				return false;
 			}
 		}).catch((e) => {
-			// Return false here, instead of throwing an error
-			// This lets the calling method continue to the 
-			// next page.			
-			return false;
-			//throw e;
+			if(handleError === false) {
+				// Return false here, instead of throwing an error
+				// This lets the calling method continue to the 
+				// next page.			
+				return false;
+			} else {
+				throw e;
+			}
 		});
     }
 
@@ -117,10 +120,7 @@ class CustomWorld {
 
     findInputField(tag, fieldId) {
     	const By = webdriver.By;
-    	let xpath = '//' + tag + '[@id="' + fieldId + '"]';
-    	if(tag !== 'input') {
-    		xpath = '//' + tag + '[@name="' + fieldId + '"]';
-    	}
+    	let xpath = this.getInputXpath(tag, fieldId);
 		return this.driver.findElement(By.xpath(xpath)).then((el) => {
 			if(typeof(el) === "object") {
 				return true;
@@ -130,6 +130,14 @@ class CustomWorld {
 		}).catch((e) => {
 			throw e;
 		});
+    }
+
+    getInputXpath(tag, fieldId) {
+	    let xpath = '//' + tag + '[@id="' + fieldId + '"]';
+	    if(tag !== 'input') {
+	    	xpath = '//' + tag + '[@name="' + fieldId + '"]';
+	    	}
+	    return xpath;
     }
 
     findDeadImages() {
@@ -148,8 +156,24 @@ class CustomWorld {
 		});
     }
 
+    setInputText(tag, fieldId, text) {
+    	const By = webdriver.By;
+    	let xpath = this.getInputXpath(tag, fieldId);
+    	return this.driver.findElement(By.xpath(xpath)).then((el) => {
+    		return el.sendKeys(text);
+    	}).catch((e) => {
+    		throw e;
+    	});
+    }
+
     getPageTitle() {
         return this.driver.getTitle();
+    }
+
+    submitButton(buttonName) {
+    	const By = webdriver.By;
+    	const xpath = '//button[@id="' + buttonName + '"]';
+    	return this.driver.findElement(By.xpath(xpath)).click();
     }
 }
 

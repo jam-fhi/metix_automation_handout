@@ -9,7 +9,7 @@ Given I go to "http://localhost:3000"
 Then we will find "<gif>" image on one or more of the pages
 Examples:
 |gif|
-|build-systems-error.gif|
+|build-systems.gif|
 |overworking.gif|
 |source.gif|
 |thinking.gif|
