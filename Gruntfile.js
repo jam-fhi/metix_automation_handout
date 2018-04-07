@@ -176,6 +176,7 @@ module.exports = function(grunt) {
                     }
 
                     } catch (e) {
+                    	grunt.log.write('Error ' + t + '\n');
                         grunt.log.write(e);
                         status = 'failed';
                         duration = 0;
@@ -243,6 +244,7 @@ module.exports = function(grunt) {
                     }
 
                 } catch(e) {
+                	grunt.log.write('Error ' + t + '\n');
                     grunt.log.write(e);
                 }
 

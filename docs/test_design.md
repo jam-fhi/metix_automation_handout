@@ -94,6 +94,7 @@ Based on the test requirements analysis, the following designs have been impleme
 		3. Info Section has no header image, but it has 3 other images which makes up for the big one missing at the top. Perhaps this is on purpose?
 		4. Form elements either use a name or an id attribute. It's inconsistent to switch between the 2.
 		5. Site is not responsive or work on mobile displays.
+		6. home and contact pages both have home-submit as button id.
 
 5. All JSON file content should be displayed.
 

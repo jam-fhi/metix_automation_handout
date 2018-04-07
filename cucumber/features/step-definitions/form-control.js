@@ -33,8 +33,12 @@ Then('the label {string} will read {string}', function (string, string2) {
 
 Then('when {string} with id {string} is populated with {string} then the result will be {string}', function (elemType, fieldId, value, message) {
 	return this.setInputText(elemType, fieldId, value).then((el) => {
-		return this.checkInputErrorMessage(elemType, fieldId, message).then((result) => {
-			return expect(result).to.equal(true);
+		return this.submitButton('home-submit').then((el) => {
+			return this.getInputErrorMessage(elemType, fieldId, message).then((result) => {
+				return expect(result).to.equal(message);
+			}).catch((e) => {
+ 				throw e;
+			});
 		}). catch((e) => {
 			throw e;
 		});

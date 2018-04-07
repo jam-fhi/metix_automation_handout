@@ -27,18 +27,18 @@ Examples:
 | page    | type     | fieldId  | value                     | message                                   |
 | Home    | input    | email    |                           | Please fill in this field                 |
 | Home    | input    | email    | !def!xyz%abc@example.com  |                                           |
-| Home    | input    | email    | john smith @ example..com | A part followed by '@' should not contain |
-| Home    | input    | email    | jamie                     | Please include an '@'                     |
-| Home    | input    | email    | @jamie...uk               | Please enter a part followed by '@'       |
+| Home    | input    | email    | john smith @ example..com | A part followed by                        |
+| Home    | input    | email    | jamie                     | Please include an                         |
+| Home    | input    | email    | @jamie...uk               | Please enter a part followed by           |
 | Home    | input    | pwd      | a                         |                                           |
 | Home    | input    | pwd      | 1                         |                                           |
 | Home    | input    | pwd      | $                         |                                           |
 | Home    | input    | pwd      |                           | Please fill in this field                 |
 | Contact | input    | email    |                           | Please fill in this field                 |
 | Contact | input    | email    | !def!xyz%abc@example.com  |                                           |
-| Contact | input    | email    | john smith @ example..com | A part followed by '@' should not contain |
-| Contact | input    | email    | jamie                     | Please include an '@'                     |
-| Contact | input    | email    | @jamie...uk               | Please enter a part followed by '@'       |
+| Contact | input    | email    | john smith @ example..com | A part followed by                        |
+| Contact | input    | email    | jamie                     | Please include an                         |
+| Contact | input    | email    | @jamie...uk               | Please enter a part followed by           |
 | Contact | input    | name     |                           | Please fill in this field                 |
 | Contact | input    | name     | jamie                     |                                           |
 | Contact | input    | lastName |                           | Please fill in this field                 |

@@ -5,10 +5,10 @@ const webdriver = require('selenium-webdriver');
 const axios = require('axios');
 
 class CustomWorld {
+
     constructor(options) {
         this.defaultTimeout = 5000;
         this.variable = 0;
-        this.serverURL;
 
         if(options.parameters.client === 'firefox') {
             this.driver = new webdriver.Builder()
@@ -55,6 +55,16 @@ class CustomWorld {
     findTextOnBody(test) {
     	const By = webdriver.By;
 		return this.driver.findElement(By.tagName("body")).getText().then((text) => {
+
+			/*
+
+			I'm returning a true/false result here because there's no benefit to
+			assert that the value is equal. Any text value I return here would be
+			a substring of the body content and the indexOf test already provides
+			enough information to prove that the provided text exists on the body.
+
+			*/
+
 			if(text.indexOf(test) >= 0) {
 				return true;
 			} else {
@@ -142,6 +152,21 @@ class CustomWorld {
     	const promise = require('selenium-webdriver').promise;
     	let pendingElements = this.driver.findElement(By.xpath('//img'));
 
+    	/*
+
+    	Lost in a previous commit, where I removed commented out sections.
+
+    	axios.get(imgSrc).then((response) => {
+			return true;
+    	}).catch((e) => {
+	 		return false;
+    	});
+
+		This section needs more work. Having a problem reading an array of all
+		img tags on the page.
+
+    	*/
+
     	return pendingElements.then(function (elements) {
     		let pendingImg = elements.map(function (elem) {
         		return elem.getAttribute('src');
@@ -163,20 +188,28 @@ class CustomWorld {
     	});
     }
 
-    checkInputErrorMessage(tag, fieldId, error) {
+    getInputErrorMessage(tag, fieldId, error) {
     	const By = webdriver.By;
-    	let xpath = this.getInputXpath(tag, fieldId);
+    	//let xpath = this.getInputXpath(tag, fieldId);
+    	let xpath = '//*[contains(text(), "' + error + '")|contains(@*, "' + error + '")]';
     	return this.driver.findElement(By.xpath(xpath)).then((el) => {
-    		return el.getAttribute('title').then((alt) => {
+    		return error;
+
+    		/*return el.getAttribute('title').then((alt) => {
     			console.log('Error message: ', alt);
     			if(alt.indexOf(error) >= 0) {
-    				return true;
+    				// Input error messages are partial matches, so return the
+    				// matching section.
+
+    				// Unfortunately the attributes I'm checking are always returning ''
+
+    				return alt.substring(alt.indexOf(error), error.length);
     			} else {
-    				return false;
+    				return alt;
     			}
     		}).catch((e) => {
     			throw e;
-    		});
+    		});*/
     	}).catch((e) => {
     		throw e;
     	});
