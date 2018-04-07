@@ -167,7 +167,8 @@ class CustomWorld {
     	const By = webdriver.By;
     	let xpath = this.getInputXpath(tag, fieldId);
     	return this.driver.findElement(By.xpath(xpath)).then((el) => {
-    		return el.getAttribute('alt').then((alt) => {
+    		return el.getAttribute('title').then((alt) => {
+    			console.log('Error message: ', alt);
     			if(alt.indexOf(error) >= 0) {
     				return true;
     			} else {

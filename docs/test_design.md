@@ -6,6 +6,8 @@ Based on the test requirements analysis, the following designs have been impleme
 
 1. All forms should be validated.
 
+	The challenge I'm having here is I can't read the error message to actually verify the validation. When I inspect the page in Chrome or Firefox the tooltip text is not visible. I guess it's set from javascript dynamically so does not show up in the elements view for the browser. I've tried accessing title, data-tip, alt attributes without any luck getting the error string to check. I think in this situation I would ask one of the developers where this text is stored and how to access it, but at present there's nothing I can do to complete this section without knowing where to read the error message text to verify it's correct for a given set of inputs.
+
 	Login form:
 
 		Email
@@ -24,6 +26,43 @@ Based on the test requirements analysis, the following designs have been impleme
 		The strategy here is to identify several invalid email addresses and check for the validation popup. Then using a valid email address, check for the password blank error popup.
 
 	Contact form:
+
+		Email
+
+			Same as above.
+
+		First Name
+
+			Hard to nail down what a valid first name is. Generally first names do not include numbers or symbols
+			There is no max length set on the first name field.
+
+			The only message presented here is "Please fill in this field."
+
+		Last Name
+
+			Hard to nail down what a valid last name is. Generally last names do not include numbers or symbols, except for -
+			There is no max length set on the last name field.
+
+			The only message presented here is "Please fill in this field."
+
+		Phone number
+
+			Phone number should really just be numbers and + sign. However there are various styles of listing numbers including spaces, (, ) and - 
+			There is also a definitive max length for phone numbers.
+
+			The only message presented here is "Please fill in this field."
+
+		Request Type
+
+			No validation. It's a drop down choice with a default value. If I was to apply tests here it would be on the server API to check that a blank input, or input different from the provided options was handled on submission. In this framework, that's not an option.
+
+		Message
+
+			Free text field. There does not appear to be any validation of content at all.
+
+			I think it should not be blank, with a minimum of 25 characters.
+			Without error messages, this can't be validated automatically.
+
 
 2. All forms should have clearly identified labels.
 	* placeholders can be used.
