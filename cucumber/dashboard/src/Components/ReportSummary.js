@@ -49,7 +49,8 @@ class ReportSummary extends React.Component {
     	const testTimeStamp = new Date;
     	testTimeStamp.setTime(this.state.timestamp);
     	const minutes = testTimeStamp.getMinutes() < 10 ? '0' + testTimeStamp.getMinutes() : testTimeStamp.getMinutes();
-    	const testDateString = testTimeStamp.getDate() + '/' + (testTimeStamp.getMonth() + 1) + '/' + testTimeStamp.getFullYear() + ' ' + testTimeStamp.getHours() + ':' + minutes;
+    	const hours = testTimeStamp.getHours() < 10 ? '0' + testTimeStamp.getHours() : testTimeStamp.getHours();
+    	const testDateString = testTimeStamp.getDate() + '/' + (testTimeStamp.getMonth() + 1) + '/' + testTimeStamp.getFullYear() + ' ' + hours + ':' + minutes;
         const { reportData } = this.state;
         const ReportFeatureView = reportData.map((report) => {
             return <ReportFeature key={report.id} reportData={report} />;

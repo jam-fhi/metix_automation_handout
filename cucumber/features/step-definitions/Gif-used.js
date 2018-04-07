@@ -36,7 +36,6 @@ Then('we will find {string} image on one or more of the pages', function (string
 Then('I expect to find all images loading', function () {
 	let deadImages = '';
     return this.findDeadImages().then((src) => {
-    	console.log(src);
     	if(src !== '') {
     		if(deadImages !== '') {
     			deadImages += ', ';
@@ -45,7 +44,6 @@ Then('I expect to find all images loading', function () {
     	}
     	return this.menuNavigate('Contact').then(() => {
     		return this.findDeadImages().then((src) => {
-    			console.log(src);
     			if(src !== '') {
     				if(deadImages !== '') {
     					deadImages += ', ';
@@ -54,7 +52,6 @@ Then('I expect to find all images loading', function () {
     			}
     			return this.menuNavigate('Info Station').then(() => {
 					return this.findDeadImages().then((src) => {
-						console.log(src);
 						if(src !== '') {
     						if(deadImages !== '') {
     							deadImages += ', ';

@@ -1,12 +1,14 @@
 require('chromedriver');
 require('geckodriver');
 require('selenium-webdriver').promise;
-const { setWorldConstructor } = require('cucumber');
+const { setWorldConstructor, setDefaultTimeout } = require('cucumber');
 const webdriver = require('selenium-webdriver');
 const axios = require('axios');
 const chrome = require('selenium-webdriver/chrome');
 const firefox = require('selenium-webdriver/firefox');
 const screen = {width: 640, height: 480};
+
+setDefaultTimeout(10 * 1000);
 
 class CustomWorld {
 
@@ -179,7 +181,6 @@ class CustomWorld {
 						deadImg += src;
 					}
 				})
-    			console.log('Dead Images', deadImg);
         		return deadImg;
     		}).catch((e) => {
     			throw e;

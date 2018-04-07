@@ -976,13 +976,14 @@ var ReportSummary = function (_React$Component) {
             var testTimeStamp = new Date();
             testTimeStamp.setTime(this.state.timestamp);
             var minutes = testTimeStamp.getMinutes() < 10 ? '0' + testTimeStamp.getMinutes() : testTimeStamp.getMinutes();
-            var testDateString = testTimeStamp.getDate() + '/' + (testTimeStamp.getMonth() + 1) + '/' + testTimeStamp.getFullYear() + ' ' + testTimeStamp.getHours() + ':' + minutes;
+            var hours = testTimeStamp.getHours() < 10 ? '0' + testTimeStamp.getHours() : testTimeStamp.getHours();
+            var testDateString = testTimeStamp.getDate() + '/' + (testTimeStamp.getMonth() + 1) + '/' + testTimeStamp.getFullYear() + ' ' + hours + ':' + minutes;
             var reportData = this.state.reportData;
 
             var ReportFeatureView = reportData.map(function (report) {
                 return _react2.default.createElement(_ReportFeature2.default, _defineProperty({ key: report.id, reportData: report, __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 55
+                        lineNumber: 56
                     },
                     __self: _this2
                 }, '__self', _this2));
@@ -991,7 +992,7 @@ var ReportSummary = function (_React$Component) {
                 'div',
                 _defineProperty({ className: styleClass, __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 58
+                        lineNumber: 59
                     },
                     __self: this
                 }, '__self', this),
@@ -999,7 +1000,7 @@ var ReportSummary = function (_React$Component) {
                     'div',
                     _defineProperty({ className: 'card-header cardTitleBar', onClick: this.toggleReportDisplay.bind(this), __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 59
+                            lineNumber: 60
                         },
                         __self: this
                     }, '__self', this),
@@ -1007,13 +1008,13 @@ var ReportSummary = function (_React$Component) {
                         _reactToggleDisplay2.default,
                         _defineProperty({ 'if': this.state.browser === 'firefox', __source: {
                                 fileName: _jsxFileName,
-                                lineNumber: 60
+                                lineNumber: 61
                             },
                             __self: this
                         }, '__self', this),
                         _react2.default.createElement('img', _defineProperty({ src: 'firefox.png', className: 'cardImg', style: { "width": "64px", "height": "64px" }, __source: {
                                 fileName: _jsxFileName,
-                                lineNumber: 61
+                                lineNumber: 62
                             },
                             __self: this
                         }, '__self', this))
@@ -1022,13 +1023,13 @@ var ReportSummary = function (_React$Component) {
                         _reactToggleDisplay2.default,
                         _defineProperty({ 'if': this.state.browser !== 'firefox', __source: {
                                 fileName: _jsxFileName,
-                                lineNumber: 63
+                                lineNumber: 64
                             },
                             __self: this
                         }, '__self', this),
                         _react2.default.createElement('img', _defineProperty({ src: 'chrome.png', className: 'cardImg', style: { "width": "64px", "height": "64px" }, __source: {
                                 fileName: _jsxFileName,
-                                lineNumber: 64
+                                lineNumber: 65
                             },
                             __self: this
                         }, '__self', this))
@@ -1037,7 +1038,7 @@ var ReportSummary = function (_React$Component) {
                         'div',
                         _defineProperty({ className: 'cardTitleSmall', __source: {
                                 fileName: _jsxFileName,
-                                lineNumber: 66
+                                lineNumber: 67
                             },
                             __self: this
                         }, '__self', this),
@@ -1053,7 +1054,7 @@ var ReportSummary = function (_React$Component) {
                     _reactToggleDisplay2.default,
                     _defineProperty({ 'if': this.state.showReport === true, __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 70
+                            lineNumber: 71
                         },
                         __self: this
                     }, '__self', this),
@@ -1061,7 +1062,7 @@ var ReportSummary = function (_React$Component) {
                         _reactToggleDisplay2.default,
                         _defineProperty({ 'if': this.state.reportLoaded === true, __source: {
                                 fileName: _jsxFileName,
-                                lineNumber: 71
+                                lineNumber: 72
                             },
                             __self: this
                         }, '__self', this),
@@ -1069,7 +1070,7 @@ var ReportSummary = function (_React$Component) {
                             _reactToggleDisplay2.default,
                             _defineProperty({ 'if': this.state.error === true, __source: {
                                     fileName: _jsxFileName,
-                                    lineNumber: 72
+                                    lineNumber: 73
                                 },
                                 __self: this
                             }, '__self', this),
@@ -1077,13 +1078,13 @@ var ReportSummary = function (_React$Component) {
                                 'div',
                                 _defineProperty({ className: 'card-body', __source: {
                                         fileName: _jsxFileName,
-                                        lineNumber: 73
+                                        lineNumber: 74
                                     },
                                     __self: this
                                 }, '__self', this),
                                 _react2.default.createElement(_ErrorReport2.default, _defineProperty({ error: this.state.errorMsg, __source: {
                                         fileName: _jsxFileName,
-                                        lineNumber: 74
+                                        lineNumber: 75
                                     },
                                     __self: this
                                 }, '__self', this))
@@ -1093,7 +1094,7 @@ var ReportSummary = function (_React$Component) {
                             _reactToggleDisplay2.default,
                             _defineProperty({ 'if': this.state.error === false, __source: {
                                     fileName: _jsxFileName,
-                                    lineNumber: 77
+                                    lineNumber: 78
                                 },
                                 __self: this
                             }, '__self', this),
@@ -1101,7 +1102,7 @@ var ReportSummary = function (_React$Component) {
                                 'div',
                                 _defineProperty({ className: 'card-body', __source: {
                                         fileName: _jsxFileName,
-                                        lineNumber: 78
+                                        lineNumber: 79
                                     },
                                     __self: this
                                 }, '__self', this),
