@@ -64,4 +64,8 @@ If there is time I will make changes to reuse one open browser window, I expect 
 
 ## Future improvements
 
-I think the biggest improvement that can be made going into the future would be setting up a docket image with all the required dependencies (version of node, grunt, selenium webdriver) installed by default so that the test framework can be quickly deployed on any machine without a install process to be completed first.
+I think the biggest improvement that can be made going into the future would be setting up a docker image with all the required dependencies (version of node, grunt, selenium webdriver) installed by default so that the test framework can be quickly deployed on any machine without a install process to be completed first.
+
+This would require a reworking of the grunt tasks to run the dashboard separetly from the test process, and I think the dashboard would need to be updated to watch for new log files being added.
+
+Additionally adding the option to take screenshots of bugs and reusing the same browser window would be high priorities going into the future.
