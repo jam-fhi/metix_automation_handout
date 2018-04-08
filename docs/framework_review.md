@@ -56,6 +56,12 @@ The second thing would be to reuse of one browser window, simply to improve perf
 
 Out side of performance improvements, I think the design is working well. The webdriver wrapper methods have been reused in a number of different scnarios and all test results (even the tests that are not fully working yet) are logged and displayed on the requested dashboard.
 
+## Going Headless
+
+Turning on headless execution of this test framework reduced the test time from about 130 to 145seconds to around 100 seconds.
+
+If there is time I will make changes to reuse one open browser window, I expect this will also bring a performance improvement.
+
 ## Future improvements
 
 I think the biggest improvement that can be made going into the future would be setting up a docket image with all the required dependencies (version of node, grunt, selenium webdriver) installed by default so that the test framework can be quickly deployed on any machine without a install process to be completed first.

@@ -27,7 +27,7 @@ class CustomWorld {
                 .forBrowser('chrome')
                 .setChromeOptions(new chrome.Options().headless().windowSize(screen))
                 .build();
-        }     
+        }
     }
 
     setServerURL(url) {
@@ -203,10 +203,18 @@ class CustomWorld {
     getInputErrorMessage(tag, fieldId, error) {
     	const By = webdriver.By;
     	//let xpath = this.getInputXpath(tag, fieldId);
+
+    	/*
+
+		Having trouble reading the validation error message.
+
+		Even with a full wild card xpath check of the site, I can not find the error message.
+ 
+    	*/
+
     	let xpath = '//*[contains(text(), "' + error + '")|contains(@*, "' + error + '")]';
     	return this.driver.findElement(By.xpath(xpath)).then((el) => {
-    		return error;
-
+			return error;
     		/*return el.getAttribute('title').then((alt) => {
     			console.log('Error message: ', alt);
     			if(alt.indexOf(error) >= 0) {

@@ -1,5 +1,24 @@
 # metix_automation_handout
 
+## Installation
+
+Make sure you have the latest version of node, or at least >= 8 for the async features.
+
+Make sure you have the latest versions of chrome and firefox, this is needed for headless execution of tests.
+
+Optional: It's handy to have grunt installed globally
+
+git clone this repository
+
+npm install 
+
+## Running the test suite
+
+npm run testServerChrome
+npm run testServerFireFox
+
+Results dashboard will open automatically at the end of the tests.
+
 ## NPM Commands
 
 npm run ...
