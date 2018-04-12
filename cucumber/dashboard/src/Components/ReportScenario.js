@@ -35,7 +35,7 @@ class ReportScenario extends React.Component {
         return (
             <div className={styleClass} >
                 <div className="card-header" onClick={this.toggleShowScenario.bind(this)}>
-                	<span>{this.state.prefix} {this.state.scenarioData.keyword}: {this.state.scenarioData.name} ({this.state.scenarioData.stats.status}, {duration}s)</span>
+                	<span>{this.state.prefix} {this.state.scenarioData.keyword}: {this.state.scenarioData.name} ({this.state.scenarioData.stats.status}, {this.state.scenarioData.stats.passed} passed, with {this.state.scenarioData.stats.failed} failed out of {this.state.scenarioData.stats.total} total in {duration}s)</span>
                 </div>
                 <ToggleDisplay if={this.state.showScenario === true}>
 	                <div className="card-body">     

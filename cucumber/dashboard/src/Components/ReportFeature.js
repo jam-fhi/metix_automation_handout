@@ -33,7 +33,7 @@ class ReportFeature extends React.Component {
         return (
             <div className={styleClass} >
                 <div className="card-header" onClick={this.toggleShowFeature.bind(this)}>
-                	<span>{this.state.prefix} {this.state.reportData.keyword}: {this.state.reportData.name} ({this.state.reportData.stats.status}, {duration}s)</span>
+                	<span>{this.state.prefix} {this.state.reportData.keyword}: {this.state.reportData.name} ({this.state.reportData.stats.status}, {this.state.reportData.stats.passed} passed with {this.state.reportData.stats.failed} failed out of {this.state.reportData.stats.total} total scenarios {duration}s)</span>
                 </div>
                 <ToggleDisplay if={this.state.showFeature === true}>
 	                <div className="card-body">

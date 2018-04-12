@@ -159,13 +159,20 @@ module.exports = function(grunt) {
 
                 const reportFileStr = grunt.file.read('cucumber/logs/' + t);
                 let duration = 0;
+                let failed = 0;
+                let pass = 0;
+                let total = 0;
                 let status = 'passed';
                 try {
                     let reportJSON = JSON.parse(reportFileStr);
                     if(reportJSON[0].stats) {
+                    	total = reportJSON.length;
                         reportJSON.forEach((feature) => {
                             if(feature.stats.status !== 'passed') {
                                 status = 'failed';
+                                failed++;
+                            } else {
+                            	pass++;
                             }
                             duration += feature.stats.duration;
                         });
@@ -192,6 +199,9 @@ module.exports = function(grunt) {
 
                 reportFile += '"timestamp":"' + timeStamp + '",';
                 reportFile += '"status":"' + status + '",';
+                reportFile += '"failed":"' + failed + '",';
+                reportFile += '"passed":"' + pass + '",';
+                reportFile += '"total":"' + total + '",';
                 reportFile += '"duration":"' + duration + '"}';
 
                 reportArray.push(JSON.parse(reportFile));
@@ -212,16 +222,23 @@ module.exports = function(grunt) {
                 try {
                     let reportJSON = JSON.parse(reportFile);
 
-                    if(!reportJSON[0].stats) {
+                    //if(!reportJSON[0].stats) {
                         reportJSON.forEach((feature) => {
                             let featureStatus = 'passed';
                             let featureDuration = 0;
+                            let scenarioFail = 0;
+                            let scenarioPass = 0;
                             feature.elements.forEach((scenario) => {
                                 let status = 'passed';
                                 let duration = 0;
+                                let failed = 0;
+                                let pass = 0;
                                 scenario.steps.forEach((step) => {
                                     if(step.result.status !== 'passed') {
                                         status = 'failed';
+                                        failed++;
+                                    } else {
+                                    	pass++;
                                     }
                                     if('duration' in step.result) {
                                         duration += step.result.duration;
@@ -230,18 +247,27 @@ module.exports = function(grunt) {
                                 scenario.stats = {};
                                 scenario.stats.duration = duration;
                                 scenario.stats.status = status;
+                                scenario.stats.failed = failed;
+                                scenario.stats.passed = pass;
+                                scenario.stats.total = scenario.steps.length;
                                 if(status !== 'passed') {
                                     featureStatus = 'failed';
+                                    scenarioFail++;
+                                } else {
+                                	scenarioPass++;
                                 }
                                 featureDuration += duration;
                             });
                           feature.stats = {};
                           feature.stats.status = featureStatus;
                           feature.stats.duration = featureDuration; 
+                          feature.stats.failed = scenarioFail;
+                          feature.stats.passed = scenarioPass;
+                          feature.stats.total = feature.elements.length;
                         });
 
                         grunt.file.write('cucumber/logs/' + t, JSON.stringify(reportJSON));
-                    }
+                   // }
 
                 } catch(e) {
                 	grunt.log.write('Error ' + t + '\n');

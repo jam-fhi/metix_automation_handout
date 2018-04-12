@@ -10,7 +10,7 @@ class ReportSummary extends React.Component {
 
 	constructor(props) {
 		super(props);
-		this.state = {browser: props.browser, timestamp: props.timestamp, filename: props.filename, showReport: false, reportLoaded: false, reportData: [], error: true, errorMsg: "Not loaded.", duration: props.duration, status: props.status};
+		this.state = {browser: props.browser, timestamp: props.timestamp, filename: props.filename, showReport: false, reportLoaded: false, reportData: [], error: true, errorMsg: "Not loaded.", duration: props.duration, status: props.status, total: props.total, failed: props.failed, passed: props.passed};
 	}
 
 	toggleReportDisplay() {
@@ -65,7 +65,7 @@ class ReportSummary extends React.Component {
             			<img src="chrome.png" className="cardImg" style={{"width":"64px","height":"64px"}} />
             		</ToggleDisplay>
             		<div className="cardTitleSmall">
-		                {testDateString} ({this.state.status}, {duration}s)
+		                {testDateString} ({this.state.status}, {this.state.passed} passed with {this.state.failed} failed out of {this.state.total} total over {duration}s)
 		            </div>
                 </div>    
                 <ToggleDisplay if={this.state.showReport === true}>

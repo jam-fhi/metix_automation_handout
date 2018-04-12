@@ -356,6 +356,12 @@ var ReportFeature = function (_React$Component) {
                         ' (',
                         this.state.reportData.stats.status,
                         ', ',
+                        this.state.reportData.stats.passed,
+                        ' passed with ',
+                        this.state.reportData.stats.failed,
+                        ' failed out of ',
+                        this.state.reportData.stats.total,
+                        ' total scenarios ',
                         duration,
                         's)'
                     )
@@ -471,7 +477,7 @@ var ReportIndex = function (_React$Component) {
             var reportIndex = this.state.reportIndex;
 
             var ReportSummaryView = reportIndex.map(function (report) {
-                return _react2.default.createElement(_ReportSummary2.default, _defineProperty({ key: report.filename, filename: report.filename, browser: report.browser, timestamp: report.timestamp, duration: report.duration, status: report.status, __source: {
+                return _react2.default.createElement(_ReportSummary2.default, _defineProperty({ key: report.filename, filename: report.filename, browser: report.browser, timestamp: report.timestamp, duration: report.duration, status: report.status, total: report.total, passed: report.passed, failed: report.failed, __source: {
                         fileName: _jsxFileName,
                         lineNumber: 23
                     },
@@ -649,6 +655,12 @@ var ReportScenario = function (_React$Component) {
                         ' (',
                         this.state.scenarioData.stats.status,
                         ', ',
+                        this.state.scenarioData.stats.passed,
+                        ' passed, with ',
+                        this.state.scenarioData.stats.failed,
+                        ' failed out of ',
+                        this.state.scenarioData.stats.total,
+                        ' total in ',
                         duration,
                         's)'
                     )
@@ -928,7 +940,7 @@ var ReportSummary = function (_React$Component) {
 
         var _this = _possibleConstructorReturn(this, (ReportSummary.__proto__ || Object.getPrototypeOf(ReportSummary)).call(this, props));
 
-        _this.state = { browser: props.browser, timestamp: props.timestamp, filename: props.filename, showReport: false, reportLoaded: false, reportData: [], error: true, errorMsg: "Not loaded.", duration: props.duration, status: props.status };
+        _this.state = { browser: props.browser, timestamp: props.timestamp, filename: props.filename, showReport: false, reportLoaded: false, reportData: [], error: true, errorMsg: "Not loaded.", duration: props.duration, status: props.status, total: props.total, failed: props.failed, passed: props.passed };
         return _this;
     }
 
@@ -1046,6 +1058,12 @@ var ReportSummary = function (_React$Component) {
                         ' (',
                         this.state.status,
                         ', ',
+                        this.state.passed,
+                        ' passed with ',
+                        this.state.failed,
+                        ' failed out of ',
+                        this.state.total,
+                        ' total over ',
                         duration,
                         's)'
                     )

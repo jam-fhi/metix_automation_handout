@@ -20,7 +20,7 @@ class ReportIndex extends React.Component {
     render() {
         const { reportIndex } = this.state;
         const ReportSummaryView = reportIndex.map((report) => {
-            return <ReportSummary key={report.filename} filename={report.filename} browser={report.browser} timestamp={report.timestamp} duration={report.duration} status={report.status} />;
+            return <ReportSummary key={report.filename} filename={report.filename} browser={report.browser} timestamp={report.timestamp} duration={report.duration} status={report.status} total={report.total} passed={report.passed} failed={report.failed}/>;
         });
 
         return (
