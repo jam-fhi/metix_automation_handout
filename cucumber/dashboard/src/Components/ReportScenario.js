@@ -21,8 +21,12 @@ class ReportScenario extends React.Component {
     render() {
 
     	let styleClass = "card border-success mb-3";
+    	let statusBadge = 'badge badge-success';
+    	let resultSummary = this.state.scenarioData.stats.passed + ' of ' + this.state.scenarioData.stats.total;
     	if(this.state.scenarioData.stats.status === "failed") {
 			styleClass = "card border-danger mb-3";
+			statusBadge = 'badge badge-danger';
+			resultSummary = this.state.scenarioData.stats.failed + ' of ' + this.state.scenarioData.stats.total;
 		}
 		const duration = getDuration(this.state.scenarioData.stats.duration);
         const { scenarioData } = this.state;
@@ -35,7 +39,7 @@ class ReportScenario extends React.Component {
         return (
             <div className={styleClass} >
                 <div className="card-header" onClick={this.toggleShowScenario.bind(this)}>
-                	<span>{this.state.prefix} {this.state.scenarioData.keyword}: {this.state.scenarioData.name} ({this.state.scenarioData.stats.status}, {this.state.scenarioData.stats.passed} passed, with {this.state.scenarioData.stats.failed} failed out of {this.state.scenarioData.stats.total} total in {duration}s)</span>
+                	<span> {this.state.prefix} <span className={statusBadge}>{resultSummary} {this.state.scenarioData.stats.status} in {duration}s</span> {this.state.scenarioData.keyword}: {this.state.scenarioData.name}</span>
                 </div>
                 <ToggleDisplay if={this.state.showScenario === true}>
 	                <div className="card-body">     

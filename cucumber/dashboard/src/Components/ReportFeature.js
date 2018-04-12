@@ -19,8 +19,12 @@ class ReportFeature extends React.Component {
     }
     render() {
     	let styleClass = "card border-success mb-3";
+    	let statusBadge = 'badge badge-success';
+    	let resultSummary = this.state.reportData.stats.passed + ' of ' + this.state.reportData.stats.total;
     	if(this.state.reportData.stats.status === "failed") {
 			styleClass = "card border-danger mb-3";
+			statusBadge = 'badge badge-danger';
+			resultSummary = this.state.reportData.stats.failed + ' of ' + this.state.reportData.stats.total;			
 		}
 		const duration = getDuration(this.state.reportData.stats.duration);
         const { reportData } = this.state;
@@ -33,7 +37,7 @@ class ReportFeature extends React.Component {
         return (
             <div className={styleClass} >
                 <div className="card-header" onClick={this.toggleShowFeature.bind(this)}>
-                	<span>{this.state.prefix} {this.state.reportData.keyword}: {this.state.reportData.name} ({this.state.reportData.stats.status}, {this.state.reportData.stats.passed} passed with {this.state.reportData.stats.failed} failed out of {this.state.reportData.stats.total} total scenarios {duration}s)</span>
+                	<span> {this.state.prefix} <span className={statusBadge}>{resultSummary} {this.state.reportData.stats.status} in {duration}s</span> {this.state.reportData.keyword}: {this.state.reportData.name}</span>
                 </div>
                 <ToggleDisplay if={this.state.showFeature === true}>
 	                <div className="card-body">

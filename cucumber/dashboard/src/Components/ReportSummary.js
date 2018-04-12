@@ -42,8 +42,12 @@ class ReportSummary extends React.Component {
 
     render() {
     	let styleClass = "card border-success mb-3";
+    	let statusBadge = 'badge badge-success';
+    	let resultSummary = this.state.passed + ' of ' + this.state.total;    	
     	if(this.state.status === "failed") {
 			styleClass = "card border-danger mb-3";
+			statusBadge = 'badge badge-danger';
+			resultSummary = this.state.failed + ' of ' + this.state.total;			
 		}
 		const duration = getDuration(this.state.duration);
     	const testTimeStamp = new Date;
@@ -65,7 +69,7 @@ class ReportSummary extends React.Component {
             			<img src="chrome.png" className="cardImg" style={{"width":"64px","height":"64px"}} />
             		</ToggleDisplay>
             		<div className="cardTitleSmall">
-		                {testDateString} ({this.state.status}, {this.state.passed} passed with {this.state.failed} failed out of {this.state.total} total over {duration}s)
+		                <span className={statusBadge}>{resultSummary} {this.state.status} in {duration}s</span> on {testDateString}
 		            </div>
                 </div>    
                 <ToggleDisplay if={this.state.showReport === true}>
