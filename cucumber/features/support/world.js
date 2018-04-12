@@ -1,11 +1,11 @@
 require('chromedriver');
 require('geckodriver');
 require('selenium-webdriver').promise;
-const { setWorldConstructor, setDefaultTimeout } = require('cucumber');
+const { setWorldConstructor, setDefaultTimeout} = require('cucumber');
 const webdriver = require('selenium-webdriver');
-const axios = require('axios');
-const chrome = require('selenium-webdriver/chrome');
 const firefox = require('selenium-webdriver/firefox');
+const chrome = require('selenium-webdriver/chrome');
+const axios = require('axios');
 const screen = {width: 640, height: 480};
 
 setDefaultTimeout(10 * 1000);
@@ -202,34 +202,17 @@ class CustomWorld {
 
     getInputErrorMessage(tag, fieldId, error) {
     	const By = webdriver.By;
-    	//let xpath = this.getInputXpath(tag, fieldId);
-
-    	/*
-
-		Having trouble reading the validation error message.
-
-		Even with a full wild card xpath check of the site, I can not find the error message.
- 
-    	*/
-
-    	let xpath = '//*[contains(text(), "' + error + '")|contains(@*, "' + error + '")]';
+    	let xpath = this.getInputXpath(tag, fieldId);
     	return this.driver.findElement(By.xpath(xpath)).then((el) => {
-			return error;
-    		/*return el.getAttribute('title').then((alt) => {
-    			console.log('Error message: ', alt);
+    		return el.getAttribute('validationMessage').then((alt) => {
     			if(alt.indexOf(error) >= 0) {
-    				// Input error messages are partial matches, so return the
-    				// matching section.
-
-    				// Unfortunately the attributes I'm checking are always returning ''
-
     				return alt.substring(alt.indexOf(error), error.length);
     			} else {
     				return alt;
     			}
     		}).catch((e) => {
     			throw e;
-    		});*/
+    		});
     	}).catch((e) => {
     		throw e;
     	});
